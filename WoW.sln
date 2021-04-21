@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31019.35
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoW", "WoW\WoW.csproj", "{C7B5CA67-72BC-4C85-9E9E-F93717FF4117}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoW.Core", "WoW.Core\WoW.Core.csproj", "{C285F0B7-7172-4EDC-84BA-CE2092F2AC89}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C7B5CA67-72BC-4C85-9E9E-F93717FF4117}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7B5CA67-72BC-4C85-9E9E-F93717FF4117}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7B5CA67-72BC-4C85-9E9E-F93717FF4117}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7B5CA67-72BC-4C85-9E9E-F93717FF4117}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C285F0B7-7172-4EDC-84BA-CE2092F2AC89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C285F0B7-7172-4EDC-84BA-CE2092F2AC89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C285F0B7-7172-4EDC-84BA-CE2092F2AC89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C285F0B7-7172-4EDC-84BA-CE2092F2AC89}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DD2425A7-C52A-429E-B8AF-9E3C359EEEA4}
+	EndGlobalSection
+EndGlobal
