@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoW", "WoW\WoW.csproj", "{C7B5CA67-72BC-4C85-9E9E-F93717FF4117}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoW.Core", "WoW.Core\WoW.Core.csproj", "{C285F0B7-7172-4EDC-84BA-CE2092F2AC89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WoW.Core", "WoW.Core\WoW.Core.csproj", "{C285F0B7-7172-4EDC-84BA-CE2092F2AC89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoW.Data", "WoW.Data\WoW.Data.csproj", "{7154CCE5-7480-44DF-858D-2AC11087C30B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{C285F0B7-7172-4EDC-84BA-CE2092F2AC89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C285F0B7-7172-4EDC-84BA-CE2092F2AC89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C285F0B7-7172-4EDC-84BA-CE2092F2AC89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7154CCE5-7480-44DF-858D-2AC11087C30B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7154CCE5-7480-44DF-858D-2AC11087C30B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7154CCE5-7480-44DF-858D-2AC11087C30B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7154CCE5-7480-44DF-858D-2AC11087C30B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
