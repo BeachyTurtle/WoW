@@ -62,16 +62,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Factories\FormFactory.cs" />
+    <Compile Include="Forms\CharactersForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Forms\CharactersForm.Designer.cs">
+      <DependentUpon>CharactersForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\CharactersForm.resx">
+      <DependentUpon>CharactersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -100,7 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WoW.Core\WoW.Core.csproj">
-      <Project>{c285f0b7-7172-4edc-84ba-ce2092f2ac89}</Project>
+      <Project>{d98b10a7-a1fd-468f-b7ad-b87f67dc0abc}</Project>
       <Name>WoW.Core</Name>
     </ProjectReference>
   </ItemGroup>

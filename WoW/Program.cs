@@ -9,27 +9,43 @@ using WoW.Core.Helpers;
 using WoW.Core.Models;
 using WoW.Core.Repositories;
 using WoW.Core.Services;
+using WoW.Forms;
 
 namespace WoW
 {
     static class Program
     {
+        public static ServiceProvider ServiceProvider { get; set; }
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            ConfigureServices();
+            Application.EnableVisualStyles();       
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            // Create a new Service Collection that will contain application dependencies 
+            var services = new ServiceCollection();
+
+            // Configure Dependency Injection services
+            ConfigureServices(services);
+
+            // Get the services for the initial form (MainForm) and open the Form
+            using (ServiceProvider = services.BuildServiceProvider())
+            {
+                var mainForm = ServiceProvider.GetRequiredService<MainForm>();
+                Application.Run(mainForm);
+            }
         }
 
         // Dependency Injection configuration
-        static void ConfigureServices()
+        static void ConfigureServices(ServiceCollection services)
         {
-            var services = new ServiceCollection();
+            // Register Forms
+            services.AddScoped<MainForm>();
+            services.AddTransient<CharactersForm>();
+
             services.AddSingleton<ISettings>(new Settings(GetConnectionString()));
             services.AddTransient<IDatabaseHelpers, DapperHelpers>();
 
@@ -37,7 +53,7 @@ namespace WoW
             services.AddTransient<ICharacterRepository, CharacterRepository>();
 
             // Services Registrations
-            services.AddTransient<ICharacterService, CharacterService>();
+            services.AddTransient<ICharacterService, CharacterService>();            
         }
 
         // Gets the DbConnection string from the AppSettings.config file
