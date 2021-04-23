@@ -1,4 +1,4 @@
-CREATE TABLE [class] (
+CREATE TABLE [Class] (
   [ClassId] int PRIMARY KEY IDENTITY(1, 1),
   [Description] varchar(100)
 )

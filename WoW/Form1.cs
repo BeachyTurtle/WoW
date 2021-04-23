@@ -7,14 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WoW.Core.Services;
 
 namespace WoW
 {
     public partial class Form1 : Form
-    {
+    {        
         public Form1()
         {
             InitializeComponent();
         }
+
     }
 }

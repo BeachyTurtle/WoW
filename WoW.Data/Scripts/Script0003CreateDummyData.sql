@@ -11,6 +11,11 @@ VALUES ('Mage')
 DECLARE @mageId int = @@identity
 
 INSERT INTO dbo.Class ([Description])
+VALUES ('Hunter')
+
+DECLARE @hunterId int = @@identity
+
+INSERT INTO dbo.Class ([Description])
 VALUES ('Monk')
 
 DECLARE @monkId int = @@identity
