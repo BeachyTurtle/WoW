@@ -30,18 +30,18 @@ namespace WoW.Core.Services
             return await _characterRepository.GetCharacterByName(name);
         }
 
-        public async Task<List<Character>> GetCharatersByGuild(Guid uId)
+        public async Task<List<Character>> GetCharatersByGuild(Guid guild)
         {
-            throw new NotImplementedException();
+            return await _characterRepository.GetCharactersByGuild(guild);
         }
 
-        public async Task<List<Character>> GetCharactersByRace(Guid uId)
+        public async Task<List<Character>> GetCharactersByRace(int race)
         {
-            throw new NotImplementedException();
+            return await _characterRepository.GetCharactersByRace(race);
         }
-        public async Task<List<Character>> GetCharacterByClass(Guid uId)
+        public async Task<List<Character>> GetCharacterByClass(int characterClass)
         {
-            throw new NotImplementedException();
+            return await _characterRepository.GetCharacterByClass(characterClass);
         }
 
         public async Task<Character> Upsert(Character character)
@@ -51,7 +51,7 @@ namespace WoW.Core.Services
 
         public async Task Delete(Guid uId)
         {
-            throw new NotImplementedException();
+            return await _characterRepository.Delete(uId);
         }
 
        

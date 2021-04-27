@@ -22,6 +22,75 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE usp_Character_GetCharactersByRace
+	@class TINYINT
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	--Returns all Characters in a guild
+	SELECT
+		CharacterUId,
+		[Name]
+		Faction,
+		Gender,
+		Race,
+		Class,
+		[Level],
+		Playtime,
+		Guild
+	FROM [Character]
+	WHERE Class = @class
+
+END
+GO
+
+CREATE PROCEDURE usp_Character_GetCharactersByRace
+	@race TINYINT
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	--Returns all Characters in a guild
+	SELECT
+		CharacterUId,
+		[Name]
+		Faction,
+		Gender,
+		Race,
+		Class,
+		[Level],
+		Playtime,
+		Guild
+	FROM [Character]
+	WHERE Race = @race
+
+END
+GO
+
+CREATE PROCEDURE usp_Character_GetCharactersByGuild
+	@guildUId UNIQUEIDENTIFIER
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	--Returns all Characters in a guild
+	SELECT
+		CharacterUId,
+		[Name]
+		Faction,
+		Gender,
+		Race,
+		Class,
+		[Level],
+		Playtime,
+		Guild
+	FROM [Character]
+	WHERE Guild = @guildUId
+
+END
+GO
+
 CREATE PROCEDURE usp_Character_GetByName
 	@name nvarchar(255)
 AS

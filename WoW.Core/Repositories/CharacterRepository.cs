@@ -49,5 +49,23 @@ namespace WoW.Core.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public async Task<List<Character>> GetCharactersByGuild(Guid guild)
+        {
+            var characters = await _databaseHelpers.FromStoredProcedureAsync<Character>("dbo.usp_Character_GetCharactersByGuild", new { GuildUId = guild });
+            return characters.ToList();
+        }
+
+        public async Task<List<Character>> GetCharactersByRace(int race)
+        {
+            var characters = await _databaseHelpers.FromStoredProcedureAsync<Character>("dbo.usp_Character_GetCharactersByRace", new { Race = race });
+            return characters.ToList();
+        }
+
+        public async Task<List<Character>> GetCharacterByClass(int characterClass)
+        {
+            var characters = await _databaseHelpers.FromStoredProcedureAsync<Character>("dbo.usp_Character_GetCharactersByClass", new { CharacterClass = characterClass });
+            return characters.ToList();
+        }
     }
 }
