@@ -46,12 +46,12 @@ namespace WoW.Core.Services
 
         public async Task<Character> Upsert(Character character)
         {
-            throw new NotImplementedException();
+            return await _characterRepository.Upsert(character);
         }
 
-        public async Task Delete(Guid uId)
+        public Task Delete(Guid uId)
         {
-            await _characterRepository.Delete(uId);
+            return _characterRepository.Delete(uId);
         }
 
        

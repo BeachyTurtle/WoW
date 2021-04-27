@@ -22,8 +22,8 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE usp_Character_GetCharactersByRace
-	@class TINYINT
+CREATE PROCEDURE usp_Character_GetCharactersByClass
+	@CharacterClass TINYINT
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -40,7 +40,7 @@ BEGIN
 		Playtime,
 		Guild
 	FROM [Character]
-	WHERE Class = @class
+	WHERE Class = @CharacterClass
 
 END
 GO

@@ -39,29 +39,34 @@ namespace WoW.Core.Repositories
         }
 
         // Single method for inserting or updating a Character
-        public Character Upsert(Character character)
+        public async Task<Character> Upsert(Character character)
         {
-            throw new NotImplementedException();
+            var characters = await _databaseHelpers.FromStoredProcedureAsync<Character>("dbo.usp_Character_Upsert", new { uId = character.UId, name = character.Name, faction = character.Faction, gender = character.Gender, race = character.Race, characterClass = character.Class, level = character.Level, guild = character.Guild   });
+            return (Character)characters;
         }
 
         // Delete a single character by it's Guid 
-        public Task Delete(Guid uId)
+        public async Task Delete(Guid uId)
         {
-            throw new NotImplementedException();
-        }
+            await _databaseHelpers.ExecuteStoredProcedureAsync("dbo.usp_Character_Delete", new { UId = uId });
 
+        }
+        
+        // returns all characters in a particular guild
         public async Task<List<Character>> GetCharactersByGuild(Guid guild)
         {
             var characters = await _databaseHelpers.FromStoredProcedureAsync<Character>("dbo.usp_Character_GetCharactersByGuild", new { GuildUId = guild });
             return characters.ToList();
         }
 
+        // returns all characters of a particular race
         public async Task<List<Character>> GetCharactersByRace(int race)
         {
             var characters = await _databaseHelpers.FromStoredProcedureAsync<Character>("dbo.usp_Character_GetCharactersByRace", new { Race = race });
             return characters.ToList();
         }
 
+        // returns all characters of a particular class
         public async Task<List<Character>> GetCharacterByClass(int characterClass)
         {
             var characters = await _databaseHelpers.FromStoredProcedureAsync<Character>("dbo.usp_Character_GetCharactersByClass", new { CharacterClass = characterClass });
