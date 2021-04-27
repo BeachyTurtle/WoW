@@ -8,7 +8,7 @@ namespace WoW.Core.Repositories
     public interface ICharacterRepository
     {
         void Delete(Guid uId);
-        Character GetCharacterByName(string name);
+        Task<Character> GetCharacterByName(string name);
         Task<Character> GetCharacterByUId(Guid uId);
         Task<List<Character>> List();
         Character Upsert(Character character);

@@ -22,6 +22,28 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE usp_Character_GetByName
+	@name nvarchar(255)
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	-- Returns a single Character by the passed in Character Name
+	SELECT
+		CharacterUId,
+		[Name],
+		Faction,
+		Gender,
+		Race,
+		Class,
+		[Level],
+		Playtime,
+		Guild
+	FROM [Character]
+	WHERE [Name] = @name
+END
+GO
+
 CREATE PROCEDURE usp_Character_GetAll
 AS
 BEGIN

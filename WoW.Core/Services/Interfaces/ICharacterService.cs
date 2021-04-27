@@ -8,6 +8,7 @@ namespace WoW.Core.Services
     public interface ICharacterService
     {
         Task Delete(Guid uId);
+        Task<Character> GetCharacterByName(string Name);
         Task<List<Character>> GetCharacterByClass(Guid uId);
         Task<List<Character>> List();
         Task<Character> GetCharacterByUId(Guid uId);

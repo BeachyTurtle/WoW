@@ -25,6 +25,11 @@ namespace WoW.Core.Services
             return await _characterRepository.List();
         }
 
+        public async Task<Character> GetCharacterByName(string name)
+        {
+            return await _characterRepository.GetCharacterByName(name);
+        }
+
         public async Task<List<Character>> GetCharatersByGuild(Guid uId)
         {
             throw new NotImplementedException();
@@ -48,5 +53,7 @@ namespace WoW.Core.Services
         {
             throw new NotImplementedException();
         }
+
+       
     }
 }

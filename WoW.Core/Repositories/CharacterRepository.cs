@@ -24,9 +24,11 @@ namespace WoW.Core.Repositories
         }
 
         // Get Character By Name
-        public Character GetCharacterByName(string name)
+        public async Task<Character> GetCharacterByName(string name)
         {
-            throw new NotImplementedException();
+            var character = await _databaseHelpers.FromStoredProcedureAsync<Character>("dbo.usp_Character_GetByName", new { Name = name });
+            return character.FirstOrDefault();
+            
         }
 
         // Get All Characters by a Id
