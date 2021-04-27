@@ -45,7 +45,7 @@ namespace WoW.Core.Repositories
         }
 
         // Delete a single character by it's Guid 
-        public void Delete(Guid uId)
+        public Task Delete(Guid uId)
         {
             throw new NotImplementedException();
         }

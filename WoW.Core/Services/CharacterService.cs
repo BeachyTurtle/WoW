@@ -51,7 +51,7 @@ namespace WoW.Core.Services
 
         public async Task Delete(Guid uId)
         {
-            return await _characterRepository.Delete(uId);
+            await _characterRepository.Delete(uId);
         }
 
        
