@@ -46,7 +46,7 @@ namespace WoW.Core.Repositories
         }
 
         // Delete a single character by it's Guid 
-        public async Task Delete(Guid uId) => await _databaseHelpers.ExecuteStoredProcedureAsync("dbo.usp_Character_Delete", new { UId = uId });
+        public async Task Delete(Guid uId) => await _databaseHelpers.ExecuteStoredProcedureAsync("dbo.usp_Character_Delete", new { characterUId = uId });
 
         // returns all characters in a particular guild
         public async Task<List<Character>> GetCharactersByGuild(Guid guild)
