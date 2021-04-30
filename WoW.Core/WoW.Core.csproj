@@ -44,10 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Factories\SqlConnectionFactory.cs" />
     <Compile Include="Helpers\DapperHelpers.cs" />
     <Compile Include="Helpers\Interfaces\IDatabaseHelpers.cs" />
+    <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Character.cs" />
     <Compile Include="Models\CharacterStatistics.cs" />
     <Compile Include="Models\Enums\Faction.cs" />
@@ -55,8 +55,10 @@
     <Compile Include="Models\ISettings.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AccountRepositories.cs" />
     <Compile Include="Repositories\CharacterRepository.cs" />
     <Compile Include="Repositories\Interfaces\ICharacterRepository.cs" />
+    <Compile Include="Services\AccountServices.cs" />
     <Compile Include="Services\CharacterService.cs" />
     <Compile Include="Services\Interfaces\ICharacterService.cs" />
   </ItemGroup>
