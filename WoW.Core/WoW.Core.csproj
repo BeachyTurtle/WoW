@@ -57,9 +57,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AccountRepositories.cs" />
     <Compile Include="Repositories\CharacterRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IAccountRepository.cs" />
     <Compile Include="Repositories\Interfaces\ICharacterRepository.cs" />
     <Compile Include="Services\AccountServices.cs" />
     <Compile Include="Services\CharacterService.cs" />
+    <Compile Include="Services\Interfaces\IAccountService.cs" />
     <Compile Include="Services\Interfaces\ICharacterService.cs" />
   </ItemGroup>
   <ItemGroup>

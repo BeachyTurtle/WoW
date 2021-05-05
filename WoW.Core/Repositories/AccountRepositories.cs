@@ -3,19 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WoW.Core.Helpers;
 using WoW.Core.Models;
+using WoW.Core.Repositories.Interfaces;
 
 namespace WoW.Core.Repositories
 {
-    public class AccountRepositories
+    public class AccountRepositories : IAccountRepository
     {
-        public Account Authenticate(string email, string password)
+        private readonly IDatabaseHelpers _databaseHelpers;
+        public AccountRepositories(IDatabaseHelpers databaseHelpers)
+        {
+            _databaseHelpers = databaseHelpers;
+        }
+        public async Task<Account> Authenticate(string email, string password)
         {
             // pass email and password to stored procedure
             // select from Account where email = email and password = password
             // if record found then update Account table, set LastLoginTime = DateTime.Now()
-           
-            throw new NotImplementedException();
+
+            var account = await _databaseHelpers.FromStoredProcedureAsync<Account>("dbo.usp_Account_Authenticate", new { email = email, password = password });
+            return account.FirstOrDefault();
+
         }
 
         public bool IsUserLoggedIn(Guid uId)
@@ -24,24 +33,24 @@ namespace WoW.Core.Repositories
             // When we need to check if the user is logged in, we will call this method
             // Call Repository method GetUserByUId
             // return IsLoggedIn boolean
-            throw new NotImplementedException();
+            
         }
 
-        public Account GetByUId(Guid uId)
+        // same as get Character by uId
+        public async Task<Account> GetAccountByUId(Guid uId)
         {
-            throw new NotImplementedException();
+            var account = await _databaseHelpers.FromStoredProcedureAsync<Account>("dbo.usp_Account_GetByUId", new { accountUId = uId });
+            return account.FirstOrDefault();
         }
 
-        public Account Upsert(Account account)
-        {
-            // same as Character upsert
-            throw new NotImplementedException();
-        }
+        // same as Character delete
+        public async Task Delete(Guid uId) => await _databaseHelpers.ExecuteStoredProcedureAsync("dbo.usp_Account_Delete", new { accountUId = uId });
 
-        public Account Delete(Account account)
+        // same as Character upsert
+        public async Task<Account> Upsert(Account account)
         {
-            // same as Character delete
-            throw new NotImplementedException();
+            var accounts = await _databaseHelpers.FromStoredProcedureAsync<Account>("dbo.usp_Account_Upsert", new { uId = account.UId, email = account.Email, password = account.Password, displayname = account.DisplayName, lastlogindatetime = account.LastLoginDateTime, isloggedin = account.IsLoggedIn, role = account.Role  });
+            return (Account)accounts;
         }
     }
 }

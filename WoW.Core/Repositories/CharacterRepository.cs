@@ -19,7 +19,7 @@ namespace WoW.Core.Repositories
         // Get Single Character by Id
         public async Task<Character> GetCharacterByUId(Guid uId)
         {
-            var character = await _databaseHelpers.FromStoredProcedureAsync<Character>("dbo.usp_Character_GetByUId", new { UId = uId });
+            var character = await _databaseHelpers.FromStoredProcedureAsync<Character>("dbo.usp_Character_GetByUId", new { characterUId = uId });
             return character.FirstOrDefault();
         }
 

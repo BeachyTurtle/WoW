@@ -4,15 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WoW.Core.Models;
+using WoW.Core.Repositories.Interfaces;
+using WoW.Core.Services.Interfaces;
 
 namespace WoW.Core.Services
 {
-    public class AccountServices
+    public class AccountServices : IAccountService
     {
-        public Account Authenticate(string email, string password)
+        private readonly IAccountRepository _accountRepository;
+        public AccountServices(IAccountRepository accountRepository)
+        {
+            _accountRepository = accountRepository;
+        }
+        public async Task<Account> Authenticate(string email, string password)
         {
             // call Authenticate repository method, pass in email and password, return Account
-            throw new NotImplementedException();
+            var account =  await _accountRepository.Authenticate(email, password);
+            if (account != null)
+            {
+                
+            }
+      
         }
 
         public Account Register(string email, string password, string characterName)
@@ -23,14 +35,11 @@ namespace WoW.Core.Services
             throw new NotImplementedException();
         }
 
-        public Account GetByUId(Guid uId)
-        {            
-            throw new NotImplementedException();
-        }
+        public async Task<Account> GetAccountByUId(Guid uId) => await _accountRepository.GetAccountByUId(uId);
 
-        public Account Delete(Guid UId)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task Delete(Guid uId) => await _accountRepository.Delete(uId);
+
+        public async Task<Account> Upsert(Account account) => await _accountRepository.Upsert(account);
+        
     }
 }
