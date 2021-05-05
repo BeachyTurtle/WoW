@@ -12,6 +12,7 @@ GO
 
 CREATE TABLE [Character] (
   [CharacterUId] uniqueidentifier PRIMARY KEY DEFAULT (NewSequentialID()),
+  [AccountUId] uniqueidentifier,
   [Name] nvarchar(255),
   [Faction] tinyint,
   [Gender] tinyint,
@@ -35,5 +36,22 @@ CREATE TABLE [CharacterStatistics] (
   [Versatility] float,
   [Avoidance] float,
   [Leech] float
+)
+GO
+
+
+CREATE TABLE [Account] (
+  [AccountUId] uniqueidentifier PRIMARY KEY DEFAULT (NewSequentialID()),
+  [Email] varchar(120),
+  [Password] varchar(50),
+  [DisplayName] varchar(120),
+  [LastLoginDate] datetime,
+  [RoleId] varchar(50)
+)
+GO
+
+CREATE TABLE [Role] (
+  [RoleId] int PRIMARY KEY IDENTITY(1, 1),
+  [Description] varchar(50)
 )
 GO

@@ -8,6 +8,7 @@ BEGIN
 	-- Returns a single Character by the passed in Character Guid (Guid c# datatype is equal to a uniqueidentifier sql datatype)
 	SELECT 
 		CharacterUId,
+		AccountUId,
 		[Name],
 		Faction,
 		Gender,
@@ -31,6 +32,7 @@ BEGIN
 	--Returns all Characters in a guild
 	SELECT
 		CharacterUId,
+		AccountUId,
 		[Name]
 		Faction,
 		Gender,
@@ -54,7 +56,8 @@ BEGIN
 	--Returns all Characters in a guild
 	SELECT
 		CharacterUId,
-		[Name]
+		AccountUId,
+		[Name],
 		Faction,
 		Gender,
 		Race,
@@ -77,7 +80,8 @@ BEGIN
 	--Returns all Characters in a guild
 	SELECT
 		CharacterUId,
-		[Name]
+		AccountUId,
+		[Name],
 		Faction,
 		Gender,
 		Race,
@@ -100,6 +104,7 @@ BEGIN
 	-- Returns a single Character by the passed in Character Name
 	SELECT
 		CharacterUId,
+		AccountUId,
 		[Name],
 		Faction,
 		Gender,
@@ -121,7 +126,8 @@ BEGIN
 	-- Returns all characters from the Characters table
 	SELECT 
 		CharacterUId,
-		[Name],
+		AccountUId,
+		[Name],		
 		Faction,
 		Gender,
 		Race,
@@ -150,6 +156,7 @@ GO
 
 CREATE PROCEDURE usp_Character_Upsert
 	@uId uniqueidentifier,
+	@accountUId uniqueidentifier,
 	@name nvarchar(255),
 	@faction tinyint,
 	@gender tinyint,
@@ -172,14 +179,15 @@ BEGIN
 	IF NOT EXISTS (SELECT 1 FROM dbo.[Character] WHERE CharacterUId = @uId)
 		BEGIN
 			-- Insert character if id not found
-			INSERT INTO [Character] ([name], faction, gender, race, class, [level], guild) OUTPUT INSERTED.CharacterUId INTO @guidTable
-			VALUES (@name, @faction, @gender, @race, @class, @level, @guild)
+			INSERT INTO [Character] ([name], AccountUId, faction, gender, race, class, [level], guild) OUTPUT INSERTED.CharacterUId INTO @guidTable
+			VALUES (@name, @accountUId, @faction, @gender, @race, @class, @level, @guild)
 		END
 	ELSE
 		BEGIN
 			-- Update Character
 			UPDATE [Character]
 			SET [name] = @name,
+				AccountUId = @accountUId,
 				faction = @faction,
 				gender = @gender,
 				race = @race,
@@ -194,14 +202,75 @@ BEGIN
 		
 		SELECT gt.characterUId,
 			c.[name],
+			c.AccountUId,
 			c.faction,
 			c.gender,
 			c.race,
 			c.class,
 			c.[level],
-			c.guild
+			c.guild		
 		FROM @guidTable gt
 		INNER JOIN dbo.[Character] c on c.CharacterUId = gt.characterUId
 
 END
 GO
+
+CREATE PROCEDURE [dbo].[usp_Character_GetByAccountUId]
+	@accountUId uniqueidentifier
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	-- Returns all characters from the Characters table
+	SELECT 
+		CharacterUId,
+		AccountUId,
+		[Name],		
+		Faction,
+		Gender,
+		Race,
+		Class,
+		[Level],
+		Playtime,
+		Guild
+	FROM [Character]
+	WHERE AccountUId = @AccountUId
+
+END
+GO
+
+CREATE PROCEDURE [dbo].[usp_Account_Authenticate]
+	@email varchar(120),
+	@password varchar(50)
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	DECLARE @accountUid uniqueidentifier
+
+	-- SETS Local Variable AccountUId to the AccountUId of the row that matches the emailaddress and password. The email address should be a primary key to make sure that this only ever returns 1 record. 
+	-- We can do this at a later point
+	SELECT @accountUId = accountUId
+					FROM Account
+					WHERE Email = @email 
+					AND [Password] = @password
+
+	-- If the accountUId variable has a value then update the account, and return the results. If the accountUid is null, then nothing is returned.
+	IF @accountUid IS NOT NULL
+		BEGIN
+			 UPDATE Account
+			 SET LastLoginDate = GetDate()
+			 WHERE AccountUId = @accountUid
+
+			 SELECT a.AccountUId,
+			 a.Email,
+			 a.[Password],
+			 a.DisplayName,
+			 a.LastLoginDate,
+			 r.[Description] [Role]
+			 FROM Account a
+			 LEFT JOIN [Role] r on r.RoleId = a.RoleId
+			 WHERE a.AccountUId = @accountUid
+		END	
+
+END
