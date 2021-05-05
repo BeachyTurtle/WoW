@@ -1,3 +1,26 @@
+-- Insert Role
+INSERT INTO dbo.[Role] ([Description])
+VALUES ('General')
+
+DECLARE @roleGeneralId int = @@identity
+
+INSERT INTO dbo.[Role] ([Description])
+VALUES ('Administrator')
+
+DECLARE @roleAdministratorId int = @@identity
+
+-- Insert Account
+
+DECLARE @outputTableAccountUIdMAndM TABLE (AccountUId UNIQUEIDENTIFIER)
+
+INSERT INTO dbo.Account ([Email], [Password], [DisplayName], [RoleId]) OUTPUT Inserted.AccountUId INTO @outputTableAccountUIdMAndM
+VALUES ('m@m.co.uk','Passw0rd1!','MAndM',@roleGeneralId)
+
+DECLARE @outputTableAccountUIdAnthony TABLE (AccountUId UNIQUEIDENTIFIER)
+
+INSERT INTO dbo.Account ([Email], [Password], [DisplayName], [RoleId]) OUTPUT Inserted.AccountUId INTO @outputTableAccountUIdAnthony
+VALUES ('a@a.co.uk','Passw0rd1!','Anthony Archibald', @roleAdministratorId)
+
 
 -- Insert Classes
 INSERT INTO dbo.Class ([Description])
@@ -71,28 +94,28 @@ DECLARE @nightElfId int = @@identity
 
 DECLARE @outputTableCharacterBrandonUId TABLE (characterUId UNIQUEIDENTIFIER) 
 
-INSERT INTO dbo.[Character] ([Name], Faction, Gender, Race, Class, [Level], Playtime, Guild) OUTPUT Inserted.CharacterUId INTO @outputTableCharacterBrandonUId
-VALUES ('Brandon',1,1,@trollId,@mageId,5,0,null)
+INSERT INTO dbo.[Character] ([Name], AccountUId, Faction, Gender, Race, Class, [Level], Playtime, Guild) OUTPUT Inserted.CharacterUId INTO @outputTableCharacterBrandonUId
+VALUES ('Brandon', (SELECT AccountUId FROM @outputTableAccountUIdMAndM),1,1,@trollId,@mageId,5,0,null)
 
 DECLARE @outputTableCharacterEckieUId TABLE (characterUId UNIQUEIDENTIFIER) 
 
-INSERT INTO dbo.[Character] ([Name], Faction, Gender, Race, Class, [Level], Playtime, Guild) OUTPUT Inserted.CharacterUId INTO @outputTableCharacterEckieUId
-VALUES ('Eckie',1,1,@humanId,@priestId,60,0,null)
+INSERT INTO dbo.[Character] ([Name], AccountUId, Faction, Gender, Race, Class, [Level], Playtime, Guild) OUTPUT Inserted.CharacterUId INTO @outputTableCharacterEckieUId
+VALUES ('Eckie', (SELECT AccountUId FROM @outputTableAccountUIdMAndM),1,1,@humanId,@priestId,60,0,null)
 
 DECLARE @outputTableCharacterConstanceUId TABLE (characterUId UNIQUEIDENTIFIER) 
 
-INSERT INTO dbo.[Character] ([Name], Faction, Gender, Race, Class, [Level], Playtime, Guild) OUTPUT Inserted.CharacterUId INTO @outputTableCharacterConstanceUId
-VALUES ('Constance Goodheart',1,1,@trollId,@mageId,12,0,null)
+INSERT INTO dbo.[Character] ([Name], AccountUId, Faction, Gender, Race, Class, [Level], Playtime, Guild) OUTPUT Inserted.CharacterUId INTO @outputTableCharacterConstanceUId
+VALUES ('Constance Goodheart', (SELECT AccountUId FROM @outputTableAccountUIdMAndM),1,1,@trollId,@mageId,12,0,null)
 
 DECLARE @outputTableCharacterLadelleUId TABLE (characterUId UNIQUEIDENTIFIER) 
 
-INSERT INTO dbo.[Character] ([Name], Faction, Gender, Race, Class, [Level], Playtime, Guild) OUTPUT Inserted.CharacterUId INTO @outputTableCharacterLadelleUId
-VALUES ('Ladelle',1,1,@nightElfId,@hunterId,38,0,null)
+INSERT INTO dbo.[Character] ([Name], AccountUId, Faction, Gender, Race, Class, [Level], Playtime, Guild) OUTPUT Inserted.CharacterUId INTO @outputTableCharacterLadelleUId
+VALUES ('Ladelle', (SELECT AccountUId FROM @outputTableAccountUIdMAndM),1,1,@nightElfId,@hunterId,38,0,null)
 
 DECLARE @outputTableCharacterBartUId TABLE (characterUId UNIQUEIDENTIFIER) 
 
-INSERT INTO dbo.[Character] ([Name], Faction, Gender, Race, Class, [Level], Playtime, Guild) OUTPUT Inserted.CharacterUId INTO @outputTableCharacterBartUId
-VALUES ('Grand Barthollomew the Third',1,1,@humanId,@warriorId,20,0,null)
+INSERT INTO dbo.[Character] ([Name], AccountUId, Faction, Gender, Race, Class, [Level], Playtime, Guild) OUTPUT Inserted.CharacterUId INTO @outputTableCharacterBartUId
+VALUES ('Grand Barthollomew the Third', (SELECT AccountUId FROM @outputTableAccountUIdMAndM),1,1,@humanId,@warriorId,20,0,null)
 
 -- Insert Character Stats
 

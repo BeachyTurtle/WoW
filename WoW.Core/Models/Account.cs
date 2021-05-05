@@ -18,8 +18,8 @@ namespace WoW.Core.Models
         /// Account name
         /// </summary>
         public string DisplayName { get; set; }
-        public DateTime LastLoginDateTime { get; set; }
-        public bool IsLoggedIn { get { return LastLoginDateTime != null ? LastLoginDateTime > DateTime.Now.AddHours(-6) : false; } }
+        public DateTime LastLoginDate { get; set; }
+        public bool IsLoggedIn { get { return LastLoginDate != null ? LastLoginDate > DateTime.Now.AddHours(-6) : false; } }
         public string Role { get; set; }
     }
 }
