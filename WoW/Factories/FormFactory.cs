@@ -12,5 +12,9 @@ namespace WoW.Factories
         {
             return (T)Program.ServiceProvider.GetService(typeof(T));
         }
+        public static T OpenForm<T>(object obj = null)
+        {
+            return (T)Program.ServiceProvider.GetService(typeof(T));
+        }
     }
 }

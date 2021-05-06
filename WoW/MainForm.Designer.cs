@@ -52,6 +52,7 @@ namespace WoW
             this.cmdBegin.TabIndex = 1;
             this.cmdBegin.Text = "Begin...";
             this.cmdBegin.UseVisualStyleBackColor = true;
+            this.cmdBegin.Click += new System.EventHandler(this.cmdBegin_Click);
             // 
             // cmdExit
             // 

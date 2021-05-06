@@ -33,7 +33,7 @@ namespace WoW.Core.Repositories
             // When we need to check if the user is logged in, we will call this method
             // Call Repository method GetUserByUId
             // return IsLoggedIn boolean
-            
+            throw new NotImplementedException();
         }
 
         // same as get Character by uId
@@ -49,7 +49,7 @@ namespace WoW.Core.Repositories
         // same as Character upsert
         public async Task<Account> Upsert(Account account)
         {
-            var accounts = await _databaseHelpers.FromStoredProcedureAsync<Account>("dbo.usp_Account_Upsert", new { uId = account.UId, email = account.Email, password = account.Password, displayname = account.DisplayName, lastlogindatetime = account.LastLoginDateTime, isloggedin = account.IsLoggedIn, role = account.Role  });
+            var accounts = await _databaseHelpers.FromStoredProcedureAsync<Account>("dbo.usp_Account_Upsert", new { uId = account.UId, email = account.Email, password = account.Password, displayname = account.DisplayName, lastlogindatetime = account.LastLoginDate, isloggedin = account.IsLoggedIn, role = account.Role  });
             return (Account)accounts;
         }
     }

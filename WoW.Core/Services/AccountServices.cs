@@ -22,7 +22,12 @@ namespace WoW.Core.Services
             var account =  await _accountRepository.Authenticate(email, password);
             if (account != null)
             {
-                
+                return account;
+            }
+            else
+            {
+                // Display message box with you aren't logged in
+                return account;
             }
       
         }

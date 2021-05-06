@@ -34,6 +34,11 @@ namespace WoW
         {
             var charactersForm = FormFactory.OpenForm<CharactersForm>();
             charactersForm.Show();
-        }        
+        }
+
+        private void cmdBegin_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -34,8 +34,8 @@ namespace WoW
             // Get the services for the initial form (MainForm) and open the Form
             using (ServiceProvider = services.BuildServiceProvider())
             {
-                var mainForm = ServiceProvider.GetRequiredService<MainForm>();
-                Application.Run(mainForm);
+                var credentials = ServiceProvider.GetRequiredService<CredentialsForm>();
+                Application.Run(credentials);
             }
         }
 
@@ -45,6 +45,8 @@ namespace WoW
             // Register Forms
             services.AddScoped<MainForm>();
             services.AddTransient<CharactersForm>();
+            services.AddScoped<CredentialsForm>();
+            services.AddTransient<RegisterForm>();
 
             services.AddSingleton<ISettings>(new Settings(GetConnectionString()));
             services.AddTransient<IDatabaseHelpers, DapperHelpers>();
