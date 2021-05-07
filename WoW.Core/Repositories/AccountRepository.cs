@@ -5,14 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using WoW.Core.Helpers;
 using WoW.Core.Models;
-using WoW.Core.Repositories.Interfaces;
+using WoW.Core.Repositories;
+using WoW;
 
 namespace WoW.Core.Repositories
 {
-    public class AccountRepositories : IAccountRepository
+    public class AccountRepository : IAccountRepository
     {
+        
         private readonly IDatabaseHelpers _databaseHelpers;
-        public AccountRepositories(IDatabaseHelpers databaseHelpers)
+        public AccountRepository(IDatabaseHelpers databaseHelpers)
         {
             _databaseHelpers = databaseHelpers;
         }
@@ -49,8 +51,15 @@ namespace WoW.Core.Repositories
         // same as Character upsert
         public async Task<Account> Upsert(Account account)
         {
-            var accounts = await _databaseHelpers.FromStoredProcedureAsync<Account>("dbo.usp_Account_Upsert", new { uId = account.UId, email = account.Email, password = account.Password, displayname = account.DisplayName, lastlogindatetime = account.LastLoginDate, isloggedin = account.IsLoggedIn, role = account.Role  });
+            var accounts = await _databaseHelpers.FromStoredProcedureAsync<Account>("dbo.usp_Account_Upsert", new { accountuId = account.UId, email = account.Email, password = account.Password, displayname = account.DisplayName, lastlogindatetime = account.LastLoginDate, isloggedin = account.IsLoggedIn, role = account.Role  });
             return (Account)accounts;
+        }
+
+        public async Task<Account> CheckExists(string displayname, string email)
+        {
+            
+            var account = await _databaseHelpers.FromStoredProcedureAsync<Account>("dbo.usp_Account_CheckExists", new { displayname = displayname, email = email });
+            return account.FirstOrDefault();
         }
     }
 }

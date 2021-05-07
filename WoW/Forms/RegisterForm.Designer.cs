@@ -29,23 +29,24 @@ namespace WoW.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblUsername = new System.Windows.Forms.Label();
+            this.lblDisplayName = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
             this.lblEmailAddress = new System.Windows.Forms.Label();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtEmailAddress = new System.Windows.Forms.TextBox();
             this.cmdReturn = new System.Windows.Forms.Button();
+            this.cmdRegister = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // lblUsername
+            // lblDisplayName
             // 
-            this.lblUsername.AutoSize = true;
-            this.lblUsername.Location = new System.Drawing.Point(72, 58);
-            this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(83, 13);
-            this.lblUsername.TabIndex = 0;
-            this.lblUsername.Text = "Enter Username";
+            this.lblDisplayName.AutoSize = true;
+            this.lblDisplayName.Location = new System.Drawing.Point(72, 58);
+            this.lblDisplayName.Name = "lblDisplayName";
+            this.lblDisplayName.Size = new System.Drawing.Size(100, 13);
+            this.lblDisplayName.TabIndex = 0;
+            this.lblDisplayName.Text = "Enter Display Name";
             // 
             // lblPassword
             // 
@@ -96,18 +97,29 @@ namespace WoW.Forms
             this.cmdReturn.UseVisualStyleBackColor = true;
             this.cmdReturn.Click += new System.EventHandler(this.cmdReturn_Click);
             // 
+            // cmdRegister
+            // 
+            this.cmdRegister.Location = new System.Drawing.Point(183, 202);
+            this.cmdRegister.Name = "cmdRegister";
+            this.cmdRegister.Size = new System.Drawing.Size(119, 35);
+            this.cmdRegister.TabIndex = 7;
+            this.cmdRegister.Text = "Register Account";
+            this.cmdRegister.UseVisualStyleBackColor = true;
+            this.cmdRegister.Click += new System.EventHandler(this.cmdRegister_Click);
+            // 
             // RegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(608, 294);
+            this.Controls.Add(this.cmdRegister);
             this.Controls.Add(this.cmdReturn);
             this.Controls.Add(this.txtEmailAddress);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.lblEmailAddress);
             this.Controls.Add(this.lblPassword);
-            this.Controls.Add(this.lblUsername);
+            this.Controls.Add(this.lblDisplayName);
             this.Name = "RegisterForm";
             this.Text = "Register";
             this.ResumeLayout(false);
@@ -117,12 +129,13 @@ namespace WoW.Forms
 
         #endregion
 
-        private System.Windows.Forms.Label lblUsername;
+        private System.Windows.Forms.Label lblDisplayName;
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.Label lblEmailAddress;
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.TextBox txtEmailAddress;
         private System.Windows.Forms.Button cmdReturn;
+        private System.Windows.Forms.Button cmdRegister;
     }
 }

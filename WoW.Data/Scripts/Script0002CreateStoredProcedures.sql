@@ -274,3 +274,60 @@ BEGIN
 		END	
 
 END
+GO
+
+CREATE PROCEDURE usp_Account_Upsert
+	@accountuId uniqueidentifier,
+	@email nvarchar(255),
+	@password nvarchar(255),
+	@displayname nvarchar(255),
+	@lastlogindatetime datetime,
+	@isloggedin bit,
+	@role varchar	
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	-- I've copy and pasted the previous upsert command and changed it to the best of my abilities to reflect an account table so the below comments are obviously not correct
+
+	-- Checks whether a Character exists based on the passed in UId
+	-- If the character doesnt exist then the character is inserted
+	-- otherwise the character is updated
+	-- the final select returns the updated data
+	-- because we've used Guid id's we have to use a temporary table (@guidTable)
+		-- and use the output function to retreive the Guid value of the created record
+	DECLARE @guidTable TABLE (characterUId uniqueidentifier)
+
+	IF NOT EXISTS (SELECT 1 FROM dbo.[Account] WHERE AccountUId = @accountuId)
+		BEGIN
+			-- Insert character if id not found
+			INSERT INTO [Account] (email, [password], displayname, lastlogindatetime, isloggedin, [role]) OUTPUT INSERTED.AccountUId INTO @guidTable
+			VALUES (@email, @password, @displayname, @lastlogindatetime, @isloggedin, @role)
+		END
+	ELSE
+		BEGIN
+			-- Update Character
+			UPDATE [Account]
+			SET email = @email,
+				[password] = @password,
+				displayname = @displayname,
+				lastlogindatetime = @lastlogindatetime,
+				isloggedin = @isloggedin,
+				[role] = @role
+			WHERE AccountUId = @uId
+
+			INSERT INTO @guidTable (characterUId)
+			VALUES (@uId)
+		END
+		
+		SELECT gt.accountUId,
+			a.email,
+			a.[password],
+			a.displayname,
+			a.lastlogindatetime,
+			a.isloggedin,
+			a.[role]	
+		FROM @guidTable gt
+		INNER JOIN dbo.[Account] a on a.AccountUId = gt.accountUId
+
+END

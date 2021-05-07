@@ -53,9 +53,11 @@ namespace WoW
 
             // Repository Registrations
             services.AddTransient<ICharacterRepository, CharacterRepository>();
+            services.AddTransient<IAccountRepository, AccountRepository>();
 
             // Services Registrations
-            services.AddTransient<ICharacterService, CharacterService>();            
+            services.AddTransient<ICharacterService, CharacterService>();
+            services.AddTransient<IAccountService, AccountService>();
         }
 
         // Gets the DbConnection string from the AppSettings.config file

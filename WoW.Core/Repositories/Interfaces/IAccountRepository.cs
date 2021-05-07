@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WoW.Core.Models;
 
-namespace WoW.Core.Repositories.Interfaces
+namespace WoW.Core.Repositories
 {
     public interface IAccountRepository
     {
@@ -13,6 +13,7 @@ namespace WoW.Core.Repositories.Interfaces
         Task<Account> Upsert(Account account);
         Task<Account> GetAccountByUId(Guid uId);
         Task<Account> Authenticate(string email, string password);
+        Task<Account> CheckExists(string displayname, string email);
         bool IsUserLoggedIn(Guid uId);
         
     }

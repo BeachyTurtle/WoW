@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WoW.Core.Models;
-using WoW.Core.Repositories.Interfaces;
-using WoW.Core.Services.Interfaces;
+using WoW.Core.Repositories;
+using WoW.Core.Services;
 
 namespace WoW.Core.Services
 {
-    public class AccountServices : IAccountService
+    public class AccountService : IAccountService
     {
         private readonly IAccountRepository _accountRepository;
-        public AccountServices(IAccountRepository accountRepository)
+        public AccountService(IAccountRepository accountRepository)
         {
             _accountRepository = accountRepository;
         }
@@ -45,6 +45,8 @@ namespace WoW.Core.Services
         public async Task Delete(Guid uId) => await _accountRepository.Delete(uId);
 
         public async Task<Account> Upsert(Account account) => await _accountRepository.Upsert(account);
+
+        public async Task<Account> CheckExists(string displayname, string email) => await _accountRepository.CheckExists(displayname, email);
         
     }
 }
