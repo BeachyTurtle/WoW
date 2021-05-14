@@ -37,6 +37,7 @@ namespace WoW.Forms
             this.txtEmailAddress = new System.Windows.Forms.TextBox();
             this.cmdReturn = new System.Windows.Forms.Button();
             this.cmdRegister = new System.Windows.Forms.Button();
+            this.cmdTestAll = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblDisplayName
@@ -107,11 +108,22 @@ namespace WoW.Forms
             this.cmdRegister.UseVisualStyleBackColor = true;
             this.cmdRegister.Click += new System.EventHandler(this.cmdRegister_Click);
             // 
+            // cmdTestAll
+            // 
+            this.cmdTestAll.Location = new System.Drawing.Point(49, 203);
+            this.cmdTestAll.Name = "cmdTestAll";
+            this.cmdTestAll.Size = new System.Drawing.Size(92, 33);
+            this.cmdTestAll.TabIndex = 8;
+            this.cmdTestAll.Text = "Test Get All";
+            this.cmdTestAll.UseVisualStyleBackColor = true;
+            this.cmdTestAll.Click += new System.EventHandler(this.cmdTestAll_Click);
+            // 
             // RegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(608, 294);
+            this.Controls.Add(this.cmdTestAll);
             this.Controls.Add(this.cmdRegister);
             this.Controls.Add(this.cmdReturn);
             this.Controls.Add(this.txtEmailAddress);
@@ -137,5 +149,6 @@ namespace WoW.Forms
         private System.Windows.Forms.TextBox txtEmailAddress;
         private System.Windows.Forms.Button cmdReturn;
         private System.Windows.Forms.Button cmdRegister;
+        private System.Windows.Forms.Button cmdTestAll;
     }
 }

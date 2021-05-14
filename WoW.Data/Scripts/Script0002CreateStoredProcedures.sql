@@ -340,6 +340,7 @@ BEGIN
 	IF (EXISTS (SELECT 1 FROM account WHERE Email = @email))
 		BEGIN
 			SELECT 1
+			Email 
 		END
 	ELSE
 			SELECT 0
@@ -357,6 +358,7 @@ BEGIN
 	IF (EXISTS (SELECT 1 FROM account WHERE DisplayName = @displayname))
 		BEGIN
 			SELECT 1
+			DisplayName
 		END
 	ELSE
 			SELECT 0

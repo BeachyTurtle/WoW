@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WoW.Core.Models;
 using WoW.Core.Services;
 
 namespace WoW.Forms
@@ -14,13 +15,21 @@ namespace WoW.Forms
     public partial class RegisterForm : Form
     {
         private readonly IAccountService _accountSerivce;
-        public RegisterForm(IAccountService accountService)
+        private readonly ICharacterService _characterService;
+        public RegisterForm(IAccountService accountService, ICharacterService characterService)
         {
             _accountSerivce = accountService;
+            _characterService = characterService;
             InitializeComponent();
+        }
+        public RegisterForm(ICharacterService characterService)
+        {
+            
+            
         }
         public string DisplayNameInput { get; set; }
         public string EmailInput { get; set; }
+        public List<Character> Characters = new List<Character>();
         private void cmdReturn_Click(object sender, EventArgs e)
         {
             {
@@ -34,16 +43,6 @@ namespace WoW.Forms
             EmailInput = txtEmailAddress.Text;
             // Query the database to check if display name or email already exists
             // return null from database or allow registration
-            var email = await _accountSerivce.CheckExistsEmail(EmailInput);
-            if(email.Email == null)
-            {
-                //allow registration
-                MessageBox.Show("Alright Mate");
-            }
-            else
-            {
-                MessageBox.Show("That display name already exists");
-            }
             var displayname = await _accountSerivce.CheckExistsDisplayName(DisplayNameInput);
             if (displayname.DisplayName == null)
             {
@@ -54,6 +53,23 @@ namespace WoW.Forms
             {
                 MessageBox.Show("That display name already exists");
             }
+            var email = await _accountSerivce.CheckExistsEmail(EmailInput);
+            if(email.Email == null)
+            {
+                //allow registration
+                MessageBox.Show("Alright Mate");
+            }
+            else
+            {
+                MessageBox.Show("That email address already exists");
+            }
+            
+        }
+
+        private async void cmdTestAll_Click(object sender, EventArgs e)
+        {
+            List<Character> characters = await _characterService.List();
+            Characters = characters;
         }
     }
 }
