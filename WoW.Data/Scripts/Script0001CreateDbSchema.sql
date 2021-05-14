@@ -45,8 +45,8 @@ CREATE TABLE [Account] (
   [Email] varchar(120),
   [Password] varchar(50),
   [DisplayName] varchar(120),
-  [LastLoginDate] datetime,
-  [RoleId] varchar(50)
+  [LastLoginDateTime] datetime,
+  [RoleId] int
 )
 GO
 

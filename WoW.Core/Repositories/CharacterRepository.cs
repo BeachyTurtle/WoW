@@ -19,7 +19,7 @@ namespace WoW.Core.Repositories
         // Get Single Character by Id
         public async Task<Character> GetCharacterByUId(Guid uId)
         {
-            var character = await _databaseHelpers.FromStoredProcedureAsync<Character>("dbo.usp_Character_GetByUId", new { characterUId = uId });
+            var character = await _databaseHelpers.FromStoredProcedureAsync<Character>("dbo.usp_Character_GetByUId", new { CharacterUId = uId });
             return character.FirstOrDefault();
         }
 
@@ -41,7 +41,7 @@ namespace WoW.Core.Repositories
         // Single method for inserting or updating a Character
         public async Task<Character> Upsert(Character character)
         {
-            var characters = await _databaseHelpers.FromStoredProcedureAsync<Character>("dbo.usp_Character_Upsert", new { uId = character.UId, name = character.Name, faction = character.Faction, gender = character.Gender, race = character.Race, characterClass = character.Class, level = character.Level, guild = character.Guild   });
+            var characters = await _databaseHelpers.FromStoredProcedureAsync<Character>("dbo.usp_Character_Upsert", new { accountUId = character.AccountUId, UId = character.UId, Name = character.Name, faction = character.Faction, gender = character.Gender, race = character.Race, characterClass = character.Class, level = character.Level, guild = character.Guild   });
             return (Character)characters;
         }
 

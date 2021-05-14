@@ -32,7 +32,7 @@ namespace WoW.Forms
             this.lblDisplayName = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
             this.lblEmailAddress = new System.Windows.Forms.Label();
-            this.txtUsername = new System.Windows.Forms.TextBox();
+            this.txtDisplayName = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtEmailAddress = new System.Windows.Forms.TextBox();
             this.cmdReturn = new System.Windows.Forms.Button();
@@ -66,12 +66,12 @@ namespace WoW.Forms
             this.lblEmailAddress.TabIndex = 2;
             this.lblEmailAddress.Text = "Enter Email Address";
             // 
-            // txtUsername
+            // txtDisplayName
             // 
-            this.txtUsername.Location = new System.Drawing.Point(183, 55);
-            this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(260, 20);
-            this.txtUsername.TabIndex = 3;
+            this.txtDisplayName.Location = new System.Drawing.Point(183, 55);
+            this.txtDisplayName.Name = "txtDisplayName";
+            this.txtDisplayName.Size = new System.Drawing.Size(260, 20);
+            this.txtDisplayName.TabIndex = 3;
             // 
             // txtPassword
             // 
@@ -116,7 +116,7 @@ namespace WoW.Forms
             this.Controls.Add(this.cmdReturn);
             this.Controls.Add(this.txtEmailAddress);
             this.Controls.Add(this.txtPassword);
-            this.Controls.Add(this.txtUsername);
+            this.Controls.Add(this.txtDisplayName);
             this.Controls.Add(this.lblEmailAddress);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblDisplayName);
@@ -132,7 +132,7 @@ namespace WoW.Forms
         private System.Windows.Forms.Label lblDisplayName;
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.Label lblEmailAddress;
-        private System.Windows.Forms.TextBox txtUsername;
+        private System.Windows.Forms.TextBox txtDisplayName;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.TextBox txtEmailAddress;
         private System.Windows.Forms.Button cmdReturn;

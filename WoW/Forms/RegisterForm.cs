@@ -19,8 +19,8 @@ namespace WoW.Forms
             _accountSerivce = accountService;
             InitializeComponent();
         }
-        public string UsernameInput { get; set; }
-        public string PasswordInput { get; set; }
+        public string DisplayNameInput { get; set; }
+        public string EmailInput { get; set; }
         private void cmdReturn_Click(object sender, EventArgs e)
         {
             {
@@ -30,24 +30,29 @@ namespace WoW.Forms
 
         private async void cmdRegister_Click(object sender, EventArgs e)
         {
+            DisplayNameInput = txtDisplayName.Text;
+            EmailInput = txtEmailAddress.Text;
             // Query the database to check if display name or email already exists
             // return null from database or allow registration
-            var accounts = await _accountSerivce.CheckExists(UsernameInput, PasswordInput);
-            if(accounts.DisplayName == null)
+            var email = await _accountSerivce.CheckExistsEmail(EmailInput);
+            if(email.Email == null)
             {
                 //allow registration
+                MessageBox.Show("Alright Mate");
             }
             else
             {
                 MessageBox.Show("That display name already exists");
             }
-            if(accounts.Email == null)
+            var displayname = await _accountSerivce.CheckExistsDisplayName(DisplayNameInput);
+            if (displayname.DisplayName == null)
             {
                 //allow registration
+                MessageBox.Show("Alright Mate");
             }
             else
             {
-                MessageBox.Show("That email address already exists");
+                MessageBox.Show("That display name already exists");
             }
         }
     }

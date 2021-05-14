@@ -46,7 +46,8 @@ namespace WoW.Core.Services
 
         public async Task<Account> Upsert(Account account) => await _accountRepository.Upsert(account);
 
-        public async Task<Account> CheckExists(string displayname, string email) => await _accountRepository.CheckExists(displayname, email);
-        
+        public async Task<Account> CheckExistsEmail(string email) => await _accountRepository.CheckExistsEmail(email);
+        public async Task<Account> CheckExistsDisplayName(string displayname) => await _accountRepository.CheckExistsEmail(displayname);
+
     }
 }

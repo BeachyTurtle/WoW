@@ -7,7 +7,7 @@ BEGIN
 
 	-- Returns a single Character by the passed in Character Guid (Guid c# datatype is equal to a uniqueidentifier sql datatype)
 	SELECT 
-		CharacterUId,
+		CharacterUId [UId],
 		AccountUId,
 		[Name],
 		Faction,
@@ -31,7 +31,7 @@ BEGIN
 
 	--Returns all Characters in a guild
 	SELECT
-		CharacterUId,
+		CharacterUId [UId],
 		AccountUId,
 		[Name]
 		Faction,
@@ -55,7 +55,7 @@ BEGIN
 
 	--Returns all Characters in a guild
 	SELECT
-		CharacterUId,
+		CharacterUId [UId],
 		AccountUId,
 		[Name],
 		Faction,
@@ -79,7 +79,7 @@ BEGIN
 
 	--Returns all Characters in a guild
 	SELECT
-		CharacterUId,
+		CharacterUId [UId],
 		AccountUId,
 		[Name],
 		Faction,
@@ -103,7 +103,7 @@ BEGIN
 
 	-- Returns a single Character by the passed in Character Name
 	SELECT
-		CharacterUId,
+		CharacterUId [UId],
 		AccountUId,
 		[Name],
 		Faction,
@@ -125,7 +125,7 @@ BEGIN
 
 	-- Returns all characters from the Characters table
 	SELECT 
-		CharacterUId,
+		CharacterUId [UId],
 		AccountUId,
 		[Name],		
 		Faction,
@@ -223,7 +223,7 @@ BEGIN
 
 	-- Returns all characters from the Characters table
 	SELECT 
-		CharacterUId,
+		CharacterUId [UId],
 		AccountUId,
 		[Name],		
 		Faction,
@@ -259,14 +259,14 @@ BEGIN
 	IF @accountUid IS NOT NULL
 		BEGIN
 			 UPDATE Account
-			 SET LastLoginDate = GetDate()
+			 SET LastLoginDateTime = GetDate()
 			 WHERE AccountUId = @accountUid
 
 			 SELECT a.AccountUId,
 			 a.Email,
 			 a.[Password],
 			 a.DisplayName,
-			 a.LastLoginDate,
+			 a.LastLoginDateTime,
 			 r.[Description] [Role]
 			 FROM Account a
 			 LEFT JOIN [Role] r on r.RoleId = a.RoleId
@@ -282,8 +282,7 @@ CREATE PROCEDURE usp_Account_Upsert
 	@password nvarchar(255),
 	@displayname nvarchar(255),
 	@lastlogindatetime datetime,
-	@isloggedin bit,
-	@role varchar	
+	@roleId int
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -296,13 +295,13 @@ BEGIN
 	-- the final select returns the updated data
 	-- because we've used Guid id's we have to use a temporary table (@guidTable)
 		-- and use the output function to retreive the Guid value of the created record
-	DECLARE @guidTable TABLE (characterUId uniqueidentifier)
+	DECLARE @guidTable TABLE (accountUId uniqueidentifier)
 
 	IF NOT EXISTS (SELECT 1 FROM dbo.[Account] WHERE AccountUId = @accountuId)
 		BEGIN
 			-- Insert character if id not found
-			INSERT INTO [Account] (email, [password], displayname, lastlogindatetime, isloggedin, [role]) OUTPUT INSERTED.AccountUId INTO @guidTable
-			VALUES (@email, @password, @displayname, @lastlogindatetime, @isloggedin, @role)
+			INSERT INTO [Account] (email, [password], displayname, lastlogindatetime, [roleid]) OUTPUT INSERTED.AccountUId INTO @guidTable
+			VALUES (@email, @password, @displayname, @lastlogindatetime, @roleid)
 		END
 	ELSE
 		BEGIN
@@ -312,22 +311,56 @@ BEGIN
 				[password] = @password,
 				displayname = @displayname,
 				lastlogindatetime = @lastlogindatetime,
-				isloggedin = @isloggedin,
-				[role] = @role
-			WHERE AccountUId = @uId
+				[roleid] = @roleid
+			WHERE AccountUId = @accountuId
 
-			INSERT INTO @guidTable (characterUId)
-			VALUES (@uId)
+			INSERT INTO @guidTable (accountUId)
+			VALUES (@accountuId)
 		END
 		
-		SELECT gt.accountUId,
+		SELECT gt.accountUId UId,
 			a.email,
 			a.[password],
 			a.displayname,
 			a.lastlogindatetime,
-			a.isloggedin,
-			a.[role]	
+			a.[roleid]	
 		FROM @guidTable gt
 		INNER JOIN dbo.[Account] a on a.AccountUId = gt.accountUId
 
 END
+GO
+
+CREATE PROCEDURE [dbo].[usp_Account_CheckExistsEmail]
+	@email varchar(120)
+	
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	IF (EXISTS (SELECT 1 FROM account WHERE Email = @email))
+		BEGIN
+			SELECT 1
+		END
+	ELSE
+			SELECT 0
+		
+
+END
+GO
+CREATE PROCEDURE [dbo].[usp_Account_CheckExistsDisplayName]
+	@displayname varchar(120)
+	
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	IF (EXISTS (SELECT 1 FROM account WHERE DisplayName = @displayname))
+		BEGIN
+			SELECT 1
+		END
+	ELSE
+			SELECT 0
+		
+
+END
+GO

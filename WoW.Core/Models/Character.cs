@@ -6,6 +6,7 @@ using WoW.Core.Models.Enums;
 namespace WoW.Core.Models
 {    public class Character
     {
+        public Guid AccountUId { get; set; }
         // Character UId is a Guid, this is harder for any attackers to guess      
         public Guid UId { get; set; }
         public string Name { get; set; }

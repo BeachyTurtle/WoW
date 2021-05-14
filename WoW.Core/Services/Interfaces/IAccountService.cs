@@ -13,6 +13,7 @@ namespace WoW.Core.Services
         Task<Account> Upsert(Account account);
         Task<Account> GetAccountByUId(Guid uId);
         Task<Account> Authenticate(string email, string password);
-        Task<Account> CheckExists(string displayname, string email);
+        Task<Account> CheckExistsEmail(string email);
+        Task<Account> CheckExistsDisplayName(string displayname);
     }
 }
