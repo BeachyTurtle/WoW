@@ -27,6 +27,7 @@ namespace WoW.Forms
             
             
         }
+        public string PasswordInput { get; set; }
         public string DisplayNameInput { get; set; }
         public string EmailInput { get; set; }
         public List<Character> Characters = new List<Character>();
@@ -39,31 +40,37 @@ namespace WoW.Forms
 
         private async void cmdRegister_Click(object sender, EventArgs e)
         {
+            
             DisplayNameInput = txtDisplayName.Text;
             EmailInput = txtEmailAddress.Text;
+            PasswordInput = txtPassword.Text;
+            /*
+            Account accountToInsert = new Account();
+            accountToInsert.DisplayName = DisplayNameInput;
+            accountToInsert.Email = EmailInput;
+            accountToInsert.Password = PasswordInput;
+            accountToInsert.LastLoginDate = DateTime.Now;
+            accountToInsert.Role = Convert.ToString(1);*/
             // Query the database to check if display name or email already exists
-            // return null from database or allow registration
+            // return null from database which allows registration
+            // return true from database which means name/email already exists
             var displayname = await _accountSerivce.CheckExistsDisplayName(DisplayNameInput);
-            if (displayname.DisplayName == null)
-            {
-                //allow registration
-                MessageBox.Show("Alright Mate");
-            }
-            else
-            {
-                MessageBox.Show("That display name already exists");
-            }
             var email = await _accountSerivce.CheckExistsEmail(EmailInput);
-            if(email.Email == null)
+            if (displayname.DisplayName == null && email.Email == null)
             {
+                await _accountSerivce.Register(DisplayNameInput, PasswordInput, EmailInput);
                 //allow registration
                 MessageBox.Show("Alright Mate");
             }
             else
-            {
-                MessageBox.Show("That email address already exists");
+            if (displayname.DisplayName != null)
+            { 
+                MessageBox.Show("That display name already exists"); 
             }
-            
+            if (email.Email != null)
+            {
+                MessageBox.Show("That email address already exists"); 
+            }  
         }
 
         private async void cmdTestAll_Click(object sender, EventArgs e)
@@ -71,5 +78,7 @@ namespace WoW.Forms
             List<Character> characters = await _characterService.List();
             Characters = characters;
         }
+
+       
     }
 }

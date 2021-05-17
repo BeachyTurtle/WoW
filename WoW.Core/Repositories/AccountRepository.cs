@@ -66,5 +66,11 @@ namespace WoW.Core.Repositories
             var account = await _databaseHelpers.FromStoredProcedureAsync<Account>("dbo.usp_Account_CheckExistsDisplayName", new { displayname = displaname }) ;
             return account.FirstOrDefault();
         }
+
+        public async Task<Account> Register(string displayname, string password, string email)
+        {
+            var account = await _databaseHelpers.FromStoredProcedureAsync<Account>("dbo.usp_Account_Register", new { displayname, password, email });
+            return account.FirstOrDefault();
+        }
     }
 }

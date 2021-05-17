@@ -15,5 +15,6 @@ namespace WoW.Core.Services
         Task<Account> Authenticate(string email, string password);
         Task<Account> CheckExistsEmail(string email);
         Task<Account> CheckExistsDisplayName(string displayname);
+        Task<Account> Register(string displayname, string password, string email);
     }
 }

@@ -80,6 +80,7 @@ namespace WoW.Forms
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(260, 20);
             this.txtPassword.TabIndex = 4;
+            
             // 
             // txtEmailAddress
             // 

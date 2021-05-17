@@ -32,14 +32,11 @@ namespace WoW.Core.Services
       
         }
 
-        public Account Register(string email, string password, string characterName)
-        {
-            // email, password, maybe display name like Vozma, Effia etc?
-            // map the properties to Account
-            // call upsert method
-            throw new NotImplementedException();
-        }
-
+        // email, password, maybe display name like Vozma, Effia etc?
+        // map the properties to Account
+        // call upsert method
+        public async Task<Account> Register(string displayName, string password, string email) => await _accountRepository.Register(displayName, password, email);
+      
         public async Task<Account> GetAccountByUId(Guid uId) => await _accountRepository.GetAccountByUId(uId);
 
         public async Task Delete(Guid uId) => await _accountRepository.Delete(uId);
@@ -47,6 +44,7 @@ namespace WoW.Core.Services
         public async Task<Account> Upsert(Account account) => await _accountRepository.Upsert(account);
 
         public async Task<Account> CheckExistsEmail(string email) => await _accountRepository.CheckExistsEmail(email);
+
         public async Task<Account> CheckExistsDisplayName(string displayname) => await _accountRepository.CheckExistsDisplayName(displayname);
 
     }

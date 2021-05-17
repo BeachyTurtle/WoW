@@ -366,3 +366,15 @@ BEGIN
 
 END
 GO
+
+CREATE PROCEDURE [dbo].[usp_Account_Register]
+	@displayname nvarchar(255),
+	@password nvarchar(255),
+	@email nvarchar(255)
+AS
+BEGIN
+	SET NOCOUNT ON;
+		INSERT INTO [Account] (displayname, [password], email)
+		VALUES (@displayname, @password, @email)
+END
+GO
