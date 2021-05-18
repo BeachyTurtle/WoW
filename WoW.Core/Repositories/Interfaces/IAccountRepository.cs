@@ -16,6 +16,7 @@ namespace WoW.Core.Repositories
         Task<Account> CheckExistsEmail(string email);
         Task<Account> CheckExistsDisplayName(string displaname);
         Task<Account> Register(string displayname, string password, string email);
+        Task<Account> GetAccountByEmail(string email);
         bool IsUserLoggedIn(Guid uId);
         
     }

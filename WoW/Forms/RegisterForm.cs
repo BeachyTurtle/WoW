@@ -44,13 +44,13 @@ namespace WoW.Forms
             DisplayNameInput = txtDisplayName.Text;
             EmailInput = txtEmailAddress.Text;
             PasswordInput = txtPassword.Text;
-            /*
+            
             Account accountToInsert = new Account();
             accountToInsert.DisplayName = DisplayNameInput;
             accountToInsert.Email = EmailInput;
             accountToInsert.Password = PasswordInput;
             accountToInsert.LastLoginDate = DateTime.Now;
-            accountToInsert.Role = Convert.ToString(1);*/
+            accountToInsert.Role = Convert.ToString(1);
             // Query the database to check if display name or email already exists
             // return null from database which allows registration
             // return true from database which means name/email already exists
@@ -58,7 +58,7 @@ namespace WoW.Forms
             var email = await _accountSerivce.CheckExistsEmail(EmailInput);
             if (displayname.DisplayName == null && email.Email == null)
             {
-                await _accountSerivce.Register(DisplayNameInput, PasswordInput, EmailInput);
+                await _accountSerivce.Upsert(accountToInsert);
                 //allow registration
                 MessageBox.Show("Alright Mate");
             }

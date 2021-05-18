@@ -7,24 +7,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WoW.Core.Models;
+using WoW.Core.Services;
 using WoW.Factories;
 
 namespace WoW.Forms
 {
     public partial class CredentialsForm : Form
     {
-        public CredentialsForm()
+        private readonly IAccountService _accountService;
+        public CredentialsForm(IAccountService accountService)
         {
+            _accountService = accountService;
             InitializeComponent();
         }
 
-        public string InputUsername { get; set; }
+        public string InputEmail { get; set; }
         public string InputPassword { get; set; }
 
         private void txtUsername_TextChanged(object sender, EventArgs e)
         {
             
-            InputUsername = txtUsername.Text;
+            InputEmail = txtEmailAddress.Text;
                 
         }
 
@@ -50,24 +54,24 @@ namespace WoW.Forms
             registerForm.Show();
         }
 
-        private void cmdLogin_Click(object sender, EventArgs e)
+        private async void cmdLogin_Click(object sender, EventArgs e)
         {
-            if (InputUsername.Length > 10)
+            Account accountToLogin = new Account();
+            var loginRequest = await _accountService.Authenticate(InputEmail, InputPassword);
+            if(loginRequest != null)
             {
-                MessageBox.Show("Username too long!");
+                accountToLogin = await _accountService.GetAccountByEmail(InputEmail);
+                LoggedInToken.LoggedInId = accountToLogin.UId;
+                var mainMenuForm = FormFactory.OpenForm<MainMenuForm>(this);
+                mainMenuForm.Show();
+                this.Hide();
             }
-            if (InputUsername.Length < 10)
+            else
             {
-                MessageBox.Show("Username too short!");
+                MessageBox.Show("Account does not exist, please try again");
             }
-            if (InputPassword.Length > 10)
-            {
-                MessageBox.Show("Password too long!");
-            }
-            if (InputPassword.Length < 10)
-            {
-                MessageBox.Show("Password too short!");
-            }
+            
         }
+        
     }
 }

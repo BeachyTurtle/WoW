@@ -29,22 +29,22 @@ namespace WoW.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtUsername = new System.Windows.Forms.TextBox();
+            this.txtEmailAddress = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblEmail = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cmdExit = new System.Windows.Forms.Button();
             this.lnkRegister = new System.Windows.Forms.LinkLabel();
             this.cmdLogin = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // txtUsername
+            // txtEmailAddress
             // 
-            this.txtUsername.Location = new System.Drawing.Point(257, 91);
-            this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(296, 20);
-            this.txtUsername.TabIndex = 0;
-            this.txtUsername.TextChanged += new System.EventHandler(this.txtUsername_TextChanged);
+            this.txtEmailAddress.Location = new System.Drawing.Point(257, 91);
+            this.txtEmailAddress.Name = "txtEmailAddress";
+            this.txtEmailAddress.Size = new System.Drawing.Size(296, 20);
+            this.txtEmailAddress.TabIndex = 0;
+            this.txtEmailAddress.TextChanged += new System.EventHandler(this.txtUsername_TextChanged);
             // 
             // txtPassword
             // 
@@ -54,19 +54,19 @@ namespace WoW.Forms
             this.txtPassword.TabIndex = 1;
             this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
             // 
-            // label1
+            // lblEmail
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(196, 91);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Username";
+            this.lblEmail.AutoSize = true;
+            this.lblEmail.Location = new System.Drawing.Point(175, 94);
+            this.lblEmail.Name = "lblEmail";
+            this.lblEmail.Size = new System.Drawing.Size(76, 13);
+            this.lblEmail.TabIndex = 2;
+            this.lblEmail.Text = "Email Address:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(196, 141);
+            this.label2.Location = new System.Drawing.Point(175, 141);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 3;
@@ -112,9 +112,9 @@ namespace WoW.Forms
             this.Controls.Add(this.lnkRegister);
             this.Controls.Add(this.cmdExit);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblEmail);
             this.Controls.Add(this.txtPassword);
-            this.Controls.Add(this.txtUsername);
+            this.Controls.Add(this.txtEmailAddress);
             this.Name = "CredentialsForm";
             this.Text = "Credentials";
             this.ResumeLayout(false);
@@ -124,9 +124,9 @@ namespace WoW.Forms
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtUsername;
+        private System.Windows.Forms.TextBox txtEmailAddress;
         private System.Windows.Forms.TextBox txtPassword;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblEmail;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button cmdExit;
         private System.Windows.Forms.LinkLabel lnkRegister;

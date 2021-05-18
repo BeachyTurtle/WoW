@@ -20,15 +20,16 @@ namespace WoW.Core.Services
         {
             // call Authenticate repository method, pass in email and password, return Account
             var account =  await _accountRepository.Authenticate(email, password);
-            if (account != null)
+            return account;
+            /*if (account != null)
             {
                 return account;
             }
             else
             {
                 // Display message box with you aren't logged in
-                return account;
-            }
+                return;
+            }*/
       
         }
 
@@ -47,5 +48,7 @@ namespace WoW.Core.Services
 
         public async Task<Account> CheckExistsDisplayName(string displayname) => await _accountRepository.CheckExistsDisplayName(displayname);
 
+        public async Task<Account> GetAccountByEmail(string email) => await _accountRepository.GetAccountByEmail(email);
+        
     }
 }

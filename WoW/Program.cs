@@ -45,8 +45,10 @@ namespace WoW
             // Register Forms
             services.AddScoped<MainForm>();
             services.AddTransient<CharactersForm>();
-            services.AddScoped<CredentialsForm>();
-            services.AddTransient<RegisterForm>();
+            services.AddSingleton<CredentialsForm>();
+            services.AddSingleton<RegisterForm>();
+            services.AddTransient<MainMenuForm>();
+            services.AddSingleton<CreateCharacterForm>();
 
             services.AddSingleton<ISettings>(new Settings(GetConnectionString()));
             services.AddTransient<IDatabaseHelpers, DapperHelpers>();

@@ -8,16 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WoW.Core.Services;
+using WoW.Factories;
 
 namespace WoW.Forms
 {
     public partial class CharactersForm : Form
     {
+        
         private readonly ICharacterService _characterService;
-        public CharactersForm(ICharacterService characterService)
+        public CharactersForm(ICharacterService characterService, CredentialsForm CredentialsForm)
         {
+            
             _characterService = characterService;
-
             InitializeComponent();
         }
 
@@ -36,7 +38,7 @@ namespace WoW.Forms
 
         private void cmdBack_Click(object sender, EventArgs e)
         {
-            Close();
+           
         }
     }
 }

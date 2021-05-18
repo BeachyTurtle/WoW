@@ -378,3 +378,21 @@ BEGIN
 		VALUES (@displayname, @password, @email)
 END
 GO
+
+CREATE PROCEDURE [dbo].[usp_Account_GetAccountByEmail]
+	@email nvarchar(255)
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT
+		AccountUId UId,
+		Email,
+		[Password],
+		DisplayName,
+		LastLoginDateTime LastLoginDate,
+		RoleId Role
+	FROM [Account]
+	WHERE Email = @email
+END
+GO

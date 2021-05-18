@@ -53,6 +53,7 @@
     <Compile Include="Models\Enums\Faction.cs" />
     <Compile Include="Models\Enums\Gender.cs" />
     <Compile Include="Models\ISettings.cs" />
+    <Compile Include="Models\LoggedInToken.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AccountRepository.cs" />

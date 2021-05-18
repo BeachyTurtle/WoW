@@ -52,7 +52,7 @@ namespace WoW.Core.Repositories
         public async Task<Account> Upsert(Account account)
         {
             var accounts = await _databaseHelpers.FromStoredProcedureAsync<Account>("dbo.usp_Account_Upsert", new { accountuId = account.UId, email = account.Email, password = account.Password, displayname = account.DisplayName, lastlogindatetime = account.LastLoginDate,  roleid = account.Role  });
-            return (Account)accounts;
+            return accounts.FirstOrDefault();
         }
 
         public async Task<Account> CheckExistsEmail(string email)
@@ -70,6 +70,12 @@ namespace WoW.Core.Repositories
         public async Task<Account> Register(string displayname, string password, string email)
         {
             var account = await _databaseHelpers.FromStoredProcedureAsync<Account>("dbo.usp_Account_Register", new { displayname, password, email });
+            return account.FirstOrDefault();
+        }
+
+        public async Task<Account> GetAccountByEmail(string email)
+        {
+            var account = await _databaseHelpers.FromStoredProcedureAsync<Account>("dbo.usp_Account_GetAccountByEmail", new { email });
             return account.FirstOrDefault();
         }
     }
