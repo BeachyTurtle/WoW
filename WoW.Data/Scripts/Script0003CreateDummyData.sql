@@ -24,6 +24,21 @@ VALUES ('a@a.co.uk','Passw0rd1!','Anthony Archibald', @roleAdministratorId)
 
 -- Insert Classes
 INSERT INTO dbo.Class ([Description])
+VALUES ('Warrior')
+
+DECLARE @warriorId int = @@identity
+
+INSERT INTO dbo.Class ([Description])
+VALUES ('Priest')
+
+DECLARE @priestId int = @@identity
+
+INSERT INTO dbo.Class ([Description])
+VALUES ('Paladin')
+
+DECLARE @paladinId int = @@identity
+
+INSERT INTO dbo.Class ([Description])
 VALUES ('Rogue')
 
 DECLARE @rogueId int = @@identity
@@ -34,31 +49,31 @@ VALUES ('Mage')
 DECLARE @mageId int = @@identity
 
 INSERT INTO dbo.Class ([Description])
-VALUES ('Hunter')
-
-DECLARE @hunterId int = @@identity
-
-INSERT INTO dbo.Class ([Description])
-VALUES ('Monk')
-
-DECLARE @monkId int = @@identity
-
-INSERT INTO dbo.Class ([Description])
-VALUES ('Priest')
-
-DECLARE @priestId int = @@identity
-
-INSERT INTO dbo.Class ([Description])
 VALUES ('Warlock')
 
 DECLARE @warlockId int = @@identity
 
 INSERT INTO dbo.Class ([Description])
-VALUES ('Warrior')
+VALUES ('Hunter')
 
-DECLARE @warriorId int = @@identity
+DECLARE @hunterId int = @@identity
+
+INSERT INTO dbo.Class ([Description])
+VALUES ('Shaman')
+
+DECLARE @shamanId int = @@identity
+
+INSERT INTO dbo.Class ([Description])
+VALUES ('Druid')
+
+DECLARE @druidId int = @@identity
 
 -- Insert Races
+
+INSERT INTO dbo.Race ([Description])
+VALUES ('Orc')
+
+DECLARE @orcId int = @@identity
 
 INSERT INTO dbo.Race ([Description])
 VALUES ('Troll')
@@ -71,14 +86,19 @@ VALUES ('Tauren')
 DECLARE @taurenId int = @@identity
 
 INSERT INTO dbo.Race ([Description])
-VALUES ('Orc')
+VALUES ('Undead')
 
-DECLARE @orcId int = @@identity
+DECLARE @undeadId int = @@identity
 
 INSERT INTO dbo.Race ([Description])
 VALUES ('Human')
 
 DECLARE @humanId int = @@identity
+
+INSERT INTO dbo.Race ([Description])
+VALUES ('Dwarf')
+
+DECLARE @dwarfId int = @@identity
 
 INSERT INTO dbo.Race ([Description])
 VALUES ('Gnome')
@@ -88,7 +108,8 @@ DECLARE @gnomeId int = @@identity
 INSERT INTO dbo.Race ([Description])
 VALUES ('Night Elf')
 
-DECLARE @nightElfId int = @@identity
+DECLARE @nightelfId int = @@identity
+
 
 -- Insert Classes
 

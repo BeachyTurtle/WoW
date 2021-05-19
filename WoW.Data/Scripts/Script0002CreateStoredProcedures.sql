@@ -396,3 +396,13 @@ BEGIN
 	WHERE Email = @email
 END
 GO
+
+CREATE PROCEDURE [dbo].[usp_Race_GetAllRaces]
+AS
+BEGIN
+	SELECT
+		RaceId,
+		[Description] [Name]
+	FROM [Race]
+END
+GO

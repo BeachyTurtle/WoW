@@ -54,16 +54,21 @@
     <Compile Include="Models\Enums\Gender.cs" />
     <Compile Include="Models\ISettings.cs" />
     <Compile Include="Models\LoggedInToken.cs" />
+    <Compile Include="Models\Race.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AccountRepository.cs" />
     <Compile Include="Repositories\CharacterRepository.cs" />
     <Compile Include="Repositories\Interfaces\IAccountRepository.cs" />
     <Compile Include="Repositories\Interfaces\ICharacterRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IRaceRepository.cs" />
+    <Compile Include="Repositories\RaceRepository.cs" />
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\CharacterService.cs" />
     <Compile Include="Services\Interfaces\IAccountService.cs" />
     <Compile Include="Services\Interfaces\ICharacterService.cs" />
+    <Compile Include="Services\Interfaces\IRaceService.cs" />
+    <Compile Include="Services\RaceService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -108,9 +108,6 @@ namespace WoW.Forms
             // cboFaction
             // 
             this.cboFaction.FormattingEnabled = true;
-            this.cboFaction.Items.AddRange(new object[] {
-            "Horde",
-            "Alliance"});
             this.cboFaction.Location = new System.Drawing.Point(136, 90);
             this.cboFaction.Name = "cboFaction";
             this.cboFaction.Size = new System.Drawing.Size(286, 21);
@@ -131,15 +128,6 @@ namespace WoW.Forms
             // cboRace
             // 
             this.cboRace.FormattingEnabled = true;
-            this.cboRace.Items.AddRange(new object[] {
-            "Human",
-            "Night Elf",
-            "Dwarf",
-            "Gnome",
-            "Orc",
-            "Troll",
-            "Tauren",
-            "Undead"});
             this.cboRace.Location = new System.Drawing.Point(136, 171);
             this.cboRace.Name = "cboRace";
             this.cboRace.Size = new System.Drawing.Size(286, 21);

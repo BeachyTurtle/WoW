@@ -46,9 +46,9 @@ namespace WoW
             services.AddScoped<MainForm>();
             services.AddTransient<CharactersForm>();
             services.AddSingleton<CredentialsForm>();
-            services.AddSingleton<RegisterForm>();
+            services.AddTransient<RegisterForm>();
             services.AddTransient<MainMenuForm>();
-            services.AddSingleton<CreateCharacterForm>();
+            services.AddTransient<CreateCharacterForm>();
 
             services.AddSingleton<ISettings>(new Settings(GetConnectionString()));
             services.AddTransient<IDatabaseHelpers, DapperHelpers>();
@@ -56,10 +56,12 @@ namespace WoW
             // Repository Registrations
             services.AddTransient<ICharacterRepository, CharacterRepository>();
             services.AddTransient<IAccountRepository, AccountRepository>();
+            services.AddTransient<IRaceRepository, RaceRepository>();
 
             // Services Registrations
             services.AddTransient<ICharacterService, CharacterService>();
             services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IRaceService, RaceService>();
         }
 
         // Gets the DbConnection string from the AppSettings.config file

@@ -31,6 +31,7 @@ namespace WoW.Forms
         {
             var createCharacterForm = FormFactory.OpenForm<CreateCharacterForm>(this);
             createCharacterForm.Show();
+            this.Hide();
         }
     }
 }
