@@ -52,6 +52,7 @@ namespace WoW.Forms
             this.cmdSelectCharacter.TabIndex = 1;
             this.cmdSelectCharacter.Text = "Select Character";
             this.cmdSelectCharacter.UseVisualStyleBackColor = true;
+            this.cmdSelectCharacter.Click += new System.EventHandler(this.cmdSelectCharacter_Click);
             // 
             // cmdLogout
             // 

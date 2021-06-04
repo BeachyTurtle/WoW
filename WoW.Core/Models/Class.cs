@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace WoW.Core.Models
 {
-    public class Race
+    public class Class
     {
-        public int RaceId { get; set; }
+        public int ClassId { get; set; }
         public string Name { get; set; }
-        public int FactionId { get; set; }
-
+        public bool IsHorde { get; set; }
+        public bool IsAlliance { get; set; }
     }
 }

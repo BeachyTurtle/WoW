@@ -31,6 +31,7 @@ namespace WoW.Forms
         {
             this.cmdBack = new System.Windows.Forms.Button();
             this.dgvCharacters = new System.Windows.Forms.DataGridView();
+            this.cmdDisplayAccountUId = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCharacters)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,11 +53,22 @@ namespace WoW.Forms
             this.dgvCharacters.Size = new System.Drawing.Size(747, 341);
             this.dgvCharacters.TabIndex = 1;
             // 
+            // cmdDisplayAccountUId
+            // 
+            this.cmdDisplayAccountUId.Location = new System.Drawing.Point(35, 394);
+            this.cmdDisplayAccountUId.Name = "cmdDisplayAccountUId";
+            this.cmdDisplayAccountUId.Size = new System.Drawing.Size(171, 32);
+            this.cmdDisplayAccountUId.TabIndex = 2;
+            this.cmdDisplayAccountUId.Text = "Current Account UId";
+            this.cmdDisplayAccountUId.UseVisualStyleBackColor = true;
+            this.cmdDisplayAccountUId.Click += new System.EventHandler(this.cmdDisplayAccountUId_Click);
+            // 
             // CharactersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.cmdDisplayAccountUId);
             this.Controls.Add(this.dgvCharacters);
             this.Controls.Add(this.cmdBack);
             this.Name = "CharactersForm";
@@ -71,5 +83,6 @@ namespace WoW.Forms
 
         private System.Windows.Forms.Button cmdBack;
         private System.Windows.Forms.DataGridView dgvCharacters;
+        private System.Windows.Forms.Button cmdDisplayAccountUId;
     }
 }

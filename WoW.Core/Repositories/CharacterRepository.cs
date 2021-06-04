@@ -41,8 +41,8 @@ namespace WoW.Core.Repositories
         // Single method for inserting or updating a Character
         public async Task<Character> Upsert(Character character)
         {
-            var characters = await _databaseHelpers.FromStoredProcedureAsync<Character>("dbo.usp_Character_Upsert", new { accountUId = character.AccountUId, UId = character.UId, Name = character.Name, faction = character.Faction, gender = character.Gender, race = character.Race, characterClass = character.Class, level = character.Level, guild = character.Guild   });
-            return (Character)characters;
+            var characters = await _databaseHelpers.FromStoredProcedureAsync<Character>("dbo.usp_Character_Upsert", new { accountUId = character.AccountUId, UId = character.UId, Name = character.Name, faction = character.Faction, gender = character.Gender, race = character.Race, classId = character.Class, level = character.Level, guild = character.Guild   });
+            return characters.FirstOrDefault();
         }
 
         // Delete a single character by it's Guid 
@@ -66,6 +66,12 @@ namespace WoW.Core.Repositories
         public async Task<List<Character>> GetCharacterByClass(int characterClass)
         {
             var characters = await _databaseHelpers.FromStoredProcedureAsync<Character>("dbo.usp_Character_GetCharactersByClass", new { CharacterClass = characterClass });
+            return characters.ToList();
+        }
+
+        public async Task<List<Character>> GetCharacterByAccountUid(Guid AccountUId)
+        {
+            var characters = await _databaseHelpers.FromStoredProcedureAsync<Character>("dbo.usp_Character_GetByAccountUId", new { accountUId = AccountUId });
             return characters.ToList();
         }
     }

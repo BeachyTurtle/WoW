@@ -161,7 +161,7 @@ CREATE PROCEDURE usp_Character_Upsert
 	@faction tinyint,
 	@gender tinyint,
 	@race int,
-	@class int,
+	@classId int,
 	@level int,
 	@guild uniqueidentifier
 AS
@@ -180,7 +180,7 @@ BEGIN
 		BEGIN
 			-- Insert character if id not found
 			INSERT INTO [Character] ([name], AccountUId, faction, gender, race, class, [level], guild) OUTPUT INSERTED.CharacterUId INTO @guidTable
-			VALUES (@name, @accountUId, @faction, @gender, @race, @class, @level, @guild)
+			VALUES (@name, @accountUId, @faction, @gender, @race, @classId, @level, @guild)
 		END
 	ELSE
 		BEGIN
@@ -191,7 +191,7 @@ BEGIN
 				faction = @faction,
 				gender = @gender,
 				race = @race,
-				class = @class,
+				class = @classId,
 				[level] = @level,
 				guild = @guild
 			WHERE CharacterUId = @uId
@@ -228,16 +228,18 @@ BEGIN
 		[Name],		
 		Faction,
 		Gender,
-		Race,
+		r.[Description] Race,
 		Class,
 		[Level],
 		Playtime,
 		Guild
-	FROM [Character]
+	FROM [Character] c
+	INNER JOIN dbo.[Race] r ON c.Race = r.RaceId
 	WHERE AccountUId = @AccountUId
 
 END
 GO
+
 
 CREATE PROCEDURE [dbo].[usp_Account_Authenticate]
 	@email varchar(120),
@@ -402,7 +404,31 @@ AS
 BEGIN
 	SELECT
 		RaceId,
-		[Description] [Name]
+		[Description] [Name],
+		[FactionId]
 	FROM [Race]
 END
 GO
+
+CREATE PROCEDURE [dbo].[usp_Class_GetAllClasses]
+AS
+BEGIN
+	SELECT
+		ClassId,
+		[Description] [Name],
+		IsHorde,
+		IsAlliance
+	FROM [Class]
+END
+GO
+
+CREATE PROCEDURE [dbo].[usp_Class_GetAvailableClassesForRaces]
+AS
+BEGIN
+SELECT Class.Description ClassName, ClassRace.ClassId, ClassRace.RaceId
+ FROM ClassRace
+ INNER JOIN Class ON Class.ClassId = ClassRace.ClassId
+ INNER JOIN Race ON Race.RaceId = ClassRace.RaceId;
+END
+GO
+

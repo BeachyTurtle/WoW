@@ -40,26 +40,27 @@ namespace WoW.Forms
 
         private async void cmdRegister_Click(object sender, EventArgs e)
         {
-            
+            // Query the database to check if display name or email already exists
+            // return null from database which allows registration
+            // return true from database which means name/email already exists
+
             DisplayNameInput = txtDisplayName.Text;
             EmailInput = txtEmailAddress.Text;
             PasswordInput = txtPassword.Text;
             
-            Account accountToInsert = new Account();
-            accountToInsert.DisplayName = DisplayNameInput;
-            accountToInsert.Email = EmailInput;
-            accountToInsert.Password = PasswordInput;
-            accountToInsert.LastLoginDate = DateTime.Now;
-            accountToInsert.Role = Convert.ToString(1);
-            // Query the database to check if display name or email already exists
-            // return null from database which allows registration
-            // return true from database which means name/email already exists
+            
             var displayname = await _accountSerivce.CheckExistsDisplayName(DisplayNameInput);
             var email = await _accountSerivce.CheckExistsEmail(EmailInput);
             if (displayname.DisplayName == null && email.Email == null)
             {
-                await _accountSerivce.Upsert(accountToInsert);
                 //allow registration
+                Account accountToInsert = new Account();
+                accountToInsert.DisplayName = DisplayNameInput;
+                accountToInsert.Email = EmailInput;
+                accountToInsert.Password = PasswordInput;
+                accountToInsert.LastLoginDate = DateTime.Now;
+                accountToInsert.Role = Convert.ToString(1);
+                await _accountSerivce.Upsert(accountToInsert);
                 MessageBox.Show("Alright Mate");
             }
             else

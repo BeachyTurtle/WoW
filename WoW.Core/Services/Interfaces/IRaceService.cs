@@ -10,5 +10,7 @@ namespace WoW.Core.Services
     public interface IRaceService
     {
         Task<List<Race>> PopulateComboBoxFromDatabase();
+        Task<List<Race>> PopulateRaceComboBoxFromDatabaseHorde();
+        Task<List<Race>> PopulateRaceComboBoxFromDatabaseAlliance();
     }
 }

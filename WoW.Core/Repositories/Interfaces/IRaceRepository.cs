@@ -9,6 +9,8 @@ namespace WoW.Core.Repositories
 {
     public interface IRaceRepository
     {
-        Task<List<Race>> PopulateComboBoxFromDatabase();
+        Task<List<Race>> PopulateRaceComboBoxFromDatabase();
+        Task<List<Race>> PopulateRaceComboBoxFromDatabaseHorde();
+        Task<List<Race>> PopulateRaceComboBoxFromDatabaseAlliance();
     }
 }

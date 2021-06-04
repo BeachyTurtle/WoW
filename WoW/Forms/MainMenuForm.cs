@@ -33,5 +33,12 @@ namespace WoW.Forms
             createCharacterForm.Show();
             this.Hide();
         }
+
+        private void cmdSelectCharacter_Click(object sender, EventArgs e)
+        {
+            var characterForm = FormFactory.OpenForm<CharactersForm>(this);
+            characterForm.Show();
+            this.Hide();
+        }
     }
 }

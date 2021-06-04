@@ -4,6 +4,7 @@ using System.Text;
 using WoW.Core.Models;
 using WoW.Core.Repositories;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace WoW.Core.Services
 {
@@ -19,7 +20,7 @@ namespace WoW.Core.Services
 
         public async Task<List<Character>> List() => await _characterRepository.List();
 
-        public async Task<Character> GetCharacterByName(string name) =>  await _characterRepository.GetCharacterByName(name);
+        public async Task<Character> GetCharacterByName(string name) => await _characterRepository.GetCharacterByName(name);
 
         public async Task<List<Character>> GetCharatersByGuild(Guid guild) => await _characterRepository.GetCharactersByGuild(guild);
 
@@ -31,9 +32,13 @@ namespace WoW.Core.Services
 
         public Task Delete(Guid uId) => _characterRepository.Delete(uId);
 
+        public async Task<List<Character>> GetCharacterByAccountUid(Guid AccountUId)
+        {
+            var characters = await _characterRepository.GetCharacterByAccountUid(AccountUId);
+            var charactersStringified = characters.Select(x => x.Race.ToString());
+            return (List<Character>)charactersStringified;
+        }
 
-
-
-
+        
     }
 }
