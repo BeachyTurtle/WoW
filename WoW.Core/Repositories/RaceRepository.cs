@@ -17,6 +17,12 @@ namespace WoW.Core.Repositories
             _databaseHelpers = databaseHelpers;
         }
 
+        public async Task<List<Race>> GetFormattedRaces()
+        {
+            var races = await _databaseHelpers.FromStoredProcedureAsync<Race>("dbo.usp_Race_GetFormattedRaces");
+            return races.ToList();
+        }
+
         public async Task<List<Race>> PopulateRaceComboBoxFromDatabase()
         {
             var races = await _databaseHelpers.FromStoredProcedureAsync<Race>("dbo.usp_Race_GetAllRaces");

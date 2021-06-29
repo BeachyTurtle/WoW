@@ -71,8 +71,32 @@ namespace WoW.Core.Repositories
 
         public async Task<List<Character>> GetCharacterByAccountUid(Guid AccountUId)
         {
+            var characterStatistics = await GetCharacterStatisticsByCharacterUId();
             var characters = await _databaseHelpers.FromStoredProcedureAsync<Character>("dbo.usp_Character_GetByAccountUId", new { accountUId = AccountUId });
-            return characters.ToList();
+            var charactersCompiled = characters.Select(x => new Character
+            {
+                UId = x.UId,
+                Name = x.Name,
+                Faction = x.Faction,
+                Gender = x.Gender,
+                Race = x.Race,
+                Class = x.Class,
+                Level = x.Level,
+                Playtime = x.Playtime,
+                Guild = x.Guild,
+                Statistics = characterStatistics.Where(c => c.UId == x.UId).FirstOrDefault()
+            });
+            //Statistics = characterStatistics.Where(c => c.UId == x.UId).FirstOrDefault() });
+            //query here to grab base statistics and put them into a BaseCharacterStatistics Model -- var characterBaseStatistics
+            //characters.Statistics = characterBaseStatistics
+            return charactersCompiled.ToList();
+            
+        }
+
+        public async Task<List<CharacterStatistics>> GetCharacterStatisticsByCharacterUId()
+        {
+            var characterStatistics = await _databaseHelpers.FromStoredProcedureAsync<CharacterStatistics>("dbo.usp_Character_GetStatsByCharacterUId");
+            return characterStatistics.ToList();
         }
     }
 }

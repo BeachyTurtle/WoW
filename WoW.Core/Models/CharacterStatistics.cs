@@ -6,8 +6,7 @@ namespace WoW.Core.Models
 {
     public class CharacterStatistics
     {
-        public class CharacterStats
-        {
+            public Guid UId { get; set; }
             public int Intellect { get; set; }
             public int Agility { get; set; }
             public int Strength { get; set; }
@@ -18,7 +17,5 @@ namespace WoW.Core.Models
             public int Versatility { get; set; }
             public int Avoidance { get; set; }
             public int Leech { get; set; }
-
-        }
     }
 }

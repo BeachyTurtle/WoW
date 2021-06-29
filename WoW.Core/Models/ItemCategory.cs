@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace WoW.Core.Models
 {
-    public static class LoggedInToken
+    public class ItemCategory
     {
-        public static Guid LoggedInId { get; set; }
-
-        public static Guid SelectedCharacter { get; set; }
-
+        public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
+       
     }
 }

@@ -12,5 +12,6 @@ namespace WoW.Core.Repositories
         Task<List<Race>> PopulateRaceComboBoxFromDatabase();
         Task<List<Race>> PopulateRaceComboBoxFromDatabaseHorde();
         Task<List<Race>> PopulateRaceComboBoxFromDatabaseAlliance();
+        Task<List<Race>> GetFormattedRaces();
     }
 }

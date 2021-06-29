@@ -12,5 +12,6 @@ namespace WoW.Core.Repositories
         Task<List<Class>> PopulateClassComboBoxFromDatabaseForHorde();
         Task<List<Class>> PopulateClassComboBoxFromDatabaseForAlliance();
         Task<List<ClassRace>> GetAllClassRaceCombos();
+        Task<List<Class>> GetClasses();
     }
 }

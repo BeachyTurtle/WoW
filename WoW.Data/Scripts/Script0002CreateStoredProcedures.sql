@@ -200,7 +200,7 @@ BEGIN
 			VALUES (@uId)
 		END
 		
-		SELECT gt.characterUId,
+		SELECT gt.characterUId UId,
 			c.[name],
 			c.AccountUId,
 			c.faction,
@@ -223,20 +223,65 @@ BEGIN
 
 	-- Returns all characters from the Characters table
 	SELECT 
-		CharacterUId [UId],
+		c.CharacterUId [UId],
 		AccountUId,
 		[Name],		
 		Faction,
 		Gender,
-		r.[Description] Race,
+		[Race],
 		Class,
 		[Level],
 		Playtime,
 		Guild
 	FROM [Character] c
-	INNER JOIN dbo.[Race] r ON c.Race = r.RaceId
 	WHERE AccountUId = @AccountUId
 
+END
+GO
+
+CREATE PROCEDURE [dbo].[usp_Character_GetStatsByCharacterUId]
+AS
+BEGIN
+	SET NOCOUNT ON;
+	-- Return all of the character stats from the characterstatistics table based on CharacterUId
+	SELECT
+		c.CharacterUId [UId],
+		Intellect,
+		Agility,
+		Strength,
+		Stamina,
+		Criticalstrike [Crit],
+		Haste,
+		Mastery,
+		Versatility,
+		Avoidance,
+		Leech
+	FROM [CharacterStatistics] cs
+	INNER JOIN [Character] c on c.CharacterUId = cs.CharacterUId
+END
+GO
+
+		
+
+CREATE PROCEDURE [dbo].[usp_CharacterStatistics_SetBaseCharacterStatistics]
+	@characterUId uniqueidentifier,
+	@intellect float,
+	@agility float,
+	@strength float,
+	@stamina float,
+	@crit float,
+	@haste float,
+	@mastery float,
+	@versatility float,
+	@avoidance float,
+	@leech float
+
+AS
+BEGIN
+	SET NOCOUNT ON;
+	-- Declare the base character statistics
+	INSERT INTO [CharacterStatistics] (CharacterUId, Intellect, Agility, Strength, Stamina, CriticalStrike, Haste, Mastery, Versatility, Avoidance, Leech)
+	VALUES (@characterUId, @intellect, @agility, @strength, @stamina, @crit, @haste, @mastery, @versatility, @avoidance, @leech)
 END
 GO
 
@@ -404,7 +449,7 @@ AS
 BEGIN
 	SELECT
 		RaceId,
-		[Description] [Name],
+		[Description] [RaceName],
 		[FactionId]
 	FROM [Race]
 END
@@ -431,4 +476,23 @@ SELECT Class.Description ClassName, ClassRace.ClassId, ClassRace.RaceId
  INNER JOIN Race ON Race.RaceId = ClassRace.RaceId;
 END
 GO
+
+CREATE PROCEDURE [dbo].[usp_Class_GetFormattedClasses]
+AS
+BEGIN
+SELECT Character.Class, Class.ClassId, Class.Description Name
+FROM Character
+INNER JOIN Class ON Class.ClassId = Character.Class
+END
+GO
+
+CREATE PROCEDURE [dbo].[usp_Race_GetFormattedRaces]
+AS
+BEGIN
+SELECT Character.Race, Race.RaceId, Race.Description RaceName
+FROM Character
+INNER JOIN Race ON Race.RaceId = Character.Race
+END
+GO
+
 

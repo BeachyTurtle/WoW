@@ -15,6 +15,8 @@ namespace WoW.Core.Services
         Task<List<Character>> GetCharatersByGuild(Guid guild);
         Task<Character> Upsert(Character character);
         Task<List<Character>> GetCharacterByClass(int characterClass);
-        Task<List<Character>> GetCharacterByAccountUid(Guid AccountUId);
+        Task<List<CharacterViewModel>> GetCharacterByAccountUid(Guid AccountUId);
+        
+
     }
 }

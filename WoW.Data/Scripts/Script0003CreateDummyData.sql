@@ -144,16 +144,16 @@ INSERT INTO dbo.CharacterStatistics ([CharacterUId], Intellect, Agility, Strengt
 VALUES ((SELECT characterUId FROM @outputTableCharacterBrandonUId), 10, 10, 20, 10, 10, 10, 10, 10, 10)
 
 INSERT INTO dbo.CharacterStatistics ([CharacterUId], Intellect, Agility, Strength, CriticalStrike, Haste, Mastery, Versatility, Avoidance, Leech)
-VALUES ((SELECT characterUId FROM @outputTableCharacterEckieUId), 10, 10, 10, 10, 10, 10, 10, 10, 10)
+VALUES ((SELECT characterUId FROM @outputTableCharacterEckieUId), 15, 10, 10, 10, 10, 10, 10, 10, 10)
 
 INSERT INTO dbo.CharacterStatistics ([CharacterUId], Intellect, Agility, Strength, CriticalStrike, Haste, Mastery, Versatility, Avoidance, Leech)
-VALUES ((SELECT characterUId FROM @outputTableCharacterConstanceUId), 10, 10, 10, 10, 10, 10, 10, 10, 10)
+VALUES ((SELECT characterUId FROM @outputTableCharacterConstanceUId), 12, 10, 10, 10, 10, 10, 10, 10, 10)
 
 INSERT INTO dbo.CharacterStatistics ([CharacterUId], Intellect, Agility, Strength, CriticalStrike, Haste, Mastery, Versatility, Avoidance, Leech)
-VALUES ((SELECT characterUId FROM @outputTableCharacterLadelleUId), 10, 10, 10, 10, 10, 10, 10, 10, 10)
+VALUES ((SELECT characterUId FROM @outputTableCharacterLadelleUId), 11, 10, 10, 10, 10, 10, 10, 10, 10)
 
 INSERT INTO dbo.CharacterStatistics ([CharacterUId], Intellect, Agility, Strength, CriticalStrike, Haste, Mastery, Versatility, Avoidance, Leech)
-VALUES ((SELECT characterUId FROM @outputTableCharacterBartUId), 10, 10, 10, 10, 10, 10, 10, 10, 10)
+VALUES ((SELECT characterUId FROM @outputTableCharacterBartUId), 18, 10, 10, 10, 10, 10, 10, 10, 10)
 
 -- Insert ClassRace Combos
 

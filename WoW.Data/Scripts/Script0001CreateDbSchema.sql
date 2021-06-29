@@ -27,19 +27,31 @@ CREATE TABLE [Character] (
 )
 GO
 
-CREATE TABLE [CharacterStatistics] (
-  [CharacterStatisticsId] int PRIMARY KEY IDENTITY(1, 1),
-  [CharacterUId] uniqueidentifier,
-  [Intellect] float,
-  [Agility] float,
-  [Strength] float,
-  [CriticalStrike] float,
-  [Haste] float,
-  [Mastery] float,
-  [Versatility] float,
-  [Avoidance] float,
-  [Leech] float
-)
+CREATE TABLE [dbo].[CharacterStatistics](
+	[CharacterStatisticsId] [int] IDENTITY(1,1) NOT NULL,
+	[CharacterUId] [uniqueidentifier] NULL,
+	[Stamina] [float] NULL,
+	[Intellect] [float] NULL,
+	[Agility] [float] NULL,
+	[Strength] [float] NULL,
+	[CriticalStrike] [float] NULL,
+	[Haste] [float] NULL,
+	[Mastery] [float] NULL,
+	[Versatility] [float] NULL,
+	[Avoidance] [float] NULL,
+	[Leech] [float] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[CharacterStatisticsId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[CharacterStatistics]  WITH CHECK ADD  CONSTRAINT [FK_CharacterStatistics_Character] FOREIGN KEY([CharacterUId])
+REFERENCES [dbo].[Character] ([CharacterUId])
+GO
+
+ALTER TABLE [dbo].[CharacterStatistics] CHECK CONSTRAINT [FK_CharacterStatistics_Character]
 GO
 
 

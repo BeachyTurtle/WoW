@@ -16,5 +16,8 @@ namespace WoW.Core.Repositories
         Task<List<Character>> GetCharactersByRace(int race);
         Task<List<Character>> GetCharacterByClass(int characterClass);
         Task<List<Character>> GetCharacterByAccountUid(Guid AccountUId);
+        Task<List<CharacterStatistics>> GetCharacterStatisticsByCharacterUId();
+        
     }
+
 }

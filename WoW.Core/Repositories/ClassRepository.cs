@@ -23,6 +23,12 @@ namespace WoW.Core.Repositories
             return classes.ToList();
         }
 
+        public async Task<List<Class>> GetClasses()
+        {
+            var classes = await _databaseHelpers.FromStoredProcedureAsync<Class>("dbo.usp_Class_GetFormattedClasses");
+            return classes.ToList();
+        }
+
         public async Task<List<Class>> PopulateClassComboBoxFromDatabaseForAlliance()
         {
             var classes = await _databaseHelpers.FromStoredProcedureAsync<Class>("dbo.usp_Class_GetAllClasses");

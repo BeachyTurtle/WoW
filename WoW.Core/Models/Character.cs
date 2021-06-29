@@ -22,5 +22,9 @@ namespace WoW.Core.Models
         public double Playtime { get; set; }
         public Guid Guild { get; set; }
         public CharacterStatistics Statistics { get; set; }
+
+        // public List<Item> EquippedItems
+        // public List<Item> InventoryItems
+        //Character equipment table and a character inventory table and those are link tables to the character
     }
 }

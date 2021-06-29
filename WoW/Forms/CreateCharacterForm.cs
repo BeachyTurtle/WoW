@@ -22,7 +22,10 @@ namespace WoW.Forms
         private readonly IAccountService _accountService;
         private readonly IRaceService _raceService;
         private readonly IClassService _classService;
-        public CreateCharacterForm(MainMenuForm _mainMenuForm, ICharacterService characterService, IAccountService accountService, IRaceService raceService, IClassService classService)
+        private readonly ICharacterStatisticsService _characterStatisticsService;
+        public CreateCharacterForm(MainMenuForm _mainMenuForm, ICharacterService characterService, 
+            IAccountService accountService, IRaceService raceService, IClassService classService,
+            ICharacterStatisticsService characterStatisticsService)
         {
             
             InitializeComponent();
@@ -33,6 +36,7 @@ namespace WoW.Forms
             _raceService = raceService;
             _classService = classService;
             _characterService = characterService;
+            _characterStatisticsService = characterStatisticsService;
             mainMenuForm = _mainMenuForm;
             mainMenuForm.Hide();
         }
@@ -89,14 +93,14 @@ namespace WoW.Forms
             {
                 var raceSource = await _raceService.PopulateRaceComboBoxFromDatabaseHorde();
                 cboRace.DataSource = raceSource;
-                cboRace.DisplayMember = "Name";
+                cboRace.DisplayMember = "RaceName";
                 cboRace.ValueMember = "RaceId";
             }
             if (cboFaction.Text == "Alliance")
             {
                 var raceSource = await _raceService.PopulateRaceComboBoxFromDatabaseAlliance();
                 cboRace.DataSource = raceSource;
-                cboRace.DisplayMember = "Name";
+                cboRace.DisplayMember = "RaceName";
                 cboRace.ValueMember = "RaceId";
             }
 
@@ -111,12 +115,17 @@ namespace WoW.Forms
         private async void cmdCreateCharacter_Click(object sender, EventArgs e)
         {
             Character characterToCreate = new Character();
+            
+            
             characterToCreate.AccountUId = LoggedInToken.LoggedInId;
             characterToCreate.Name = txtCharacterName.Text;
             characterToCreate.Faction = (Faction)Enum.Parse(typeof(Faction), cboFaction.SelectedValue.ToString());
             characterToCreate.Gender = (Gender)Enum.Parse(typeof(Gender), cboGender.SelectedValue.ToString());
             characterToCreate.Race = (int)cboRace.SelectedValue;
             characterToCreate.Class = (int)cboClass.SelectedValue;
+
+            
+            
             var characterName = await _characterService.GetCharacterByName(txtCharacterName.Text);
             try
             {
